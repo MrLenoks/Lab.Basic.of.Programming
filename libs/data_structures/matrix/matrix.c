@@ -76,5 +76,26 @@ void outputMatrices(matrix *ms, int nMatrices){
     }
 }
 
+//обмен строк с порядковыми номерами i1 и i2 в матрице m
+void swapRows(matrix m, int i1, int i2){
+    if (0 <= i1 && i1 < m->nRows && 0 <= i2 && i2 < m->nRows) {
+        int *temp = m->values[i1];
+        m->values[i1] = m->values[i2];
+        m->values[i2] = temp;
+    }
+}
+
+//обмен колонок с порядковыми номерами j1 и j2 в матрице m
+void swapColumns(matrix m, int j1, int j2){
+    if(0 <= j1 && j1 < m->nCols && 0 <= j2 && j2 < m->nCols){
+        for (int i = 0; i < m->nRows; i++) {
+            int temp = m->values[i][j1];
+            m->values[i][j1] = m->values[i][j2];
+            m->values[i][j2] = temp;
+        }
+    }
+}
+
+
 
 
