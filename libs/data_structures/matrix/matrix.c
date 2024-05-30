@@ -96,6 +96,76 @@ void swapColumns(matrix m, int j1, int j2){
     }
 }
 
+//меняет значения указателей местами
+void swap_pointers(int **a, int **b) {
+    int *t = *a;
+    *a = *b;
+    *b = t;
+}
+
+//выполняет сортировку вставками строк матрицы m по неубыванию значения функции criteria применяемой для строк
+void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(int*, int)){
+    int *criteriaValues = (int*)malloc(sizeof(int) * m.nRows);
+
+    for (int i = 0; i < m.nRows; i++) {
+        criteriaValues[i] = criteria(m.values[i], m.nCols);
+    }
+
+    for (int i = 0; i < m.nRows; i++) {
+        int minIndex = i;
+
+        for (int j = i + 1; j < m.nRows; j++) {
+            if (criteriaValues[j] > criteriaValues[minIndex])
+                minIndex = j;
+        }
+
+        if (i != minIndex) {
+            swap_pointers(&criteriaValues[i], &criteriaValues[minIndex]);
+            swapRows(m, i, minIndex);
+        }
+    }
+
+    free(criteriaValues);
+}
+
+//меняет местами значения переменных через указатели
+void swap(int *a, int *b) {
+    int t = *a;
+    *a = *b;
+    *b = t;
+}
+
+//выполняет сортировку выбором столбцов матрицы m по неубыванию значения функции criteria применяемой для столбцов
+void selectionSortColsMatrixByColCriteria(matrix m,int (*criteria)(int*, int)){
+    int *criteriaValues = (int*)malloc(sizeof(int) * m.nCols);
+    int *column = (int*)malloc(sizeof(int) * m.nRows);
+
+    for (int j = 0; j < m.nCols; j++) {
+        for (int i = 0; i < m.nRows; i++) {
+            column[i] = m.values[i][j];
+        }
+
+        criteriaValues[j] = criteria(column, m.nCols);
+    }
+
+    for (int i = 0; i < m.nCols; i++) {
+        int minIndex = i;
+
+        for (int j = i + 1; j < m.nCols; j++) {
+            if (criteriaValues[j] < criteriaValues[minIndex])
+                minIndex = j;
+        }
+
+        if (i != minIndex) {
+            swap(&criteriaValues[i], &criteriaValues[minIndex]);
+            swapColumns(m, i, minIndex);
+        }
+    }
+
+    free(column);
+    free(criteriaValues);
+}
+
 
 
 
