@@ -468,3 +468,44 @@ void twelfthTask (matrix m){
     }
 }
 
+//возвращает - "истина", если матрица отсортирована, иначе - "ложь"
+bool isNonDescendingSorted(int *a, int n) {
+    for (int i = 1; i < n; i++) {
+        if (a[i] < a[i-1]) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+//если хотя бы одна строка не является неубывающей, функция возвращает false,
+//иначе возвращает true.
+bool hasAllNonDescendingRows(matrix m) {
+    for (int i = 0; i < m.nRows; i++) {
+        if (!isNonDescendingSorted(m.values[i], m.nCols)) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+//определяет число матриц, строки которых упорядочены по неубыванию элементов
+int countNonDescendingRowsMatrices(matrix *ms, int nMatrix) {
+    int count = 0;
+
+    for (int i = 0; i < nMatrix; i++) {
+        if (hasAllNonDescendingRows(ms[i])) {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+//Задание 13: определяет число матриц, строки которых упорядочены по неубыванию элементов.
+int thirteenthTask(matrix *ms, int nMatrix) {
+    return countNonDescendingRowsMatrices(ms, nMatrix);
+}
+
