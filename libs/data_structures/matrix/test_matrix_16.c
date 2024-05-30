@@ -752,6 +752,95 @@ void test_eleventhTask(){
     test_eleventhTask_simpleMatrix();
 }
 
+void test_twelfthTask_equalElements(){
+    matrix m = createMatrixFromArray(
+            (int[]) {
+                    0, 0, 0,
+                    0, 0, 0,
+                    0, 0, 0
+            }, 3, 3);
+
+    matrix m_return = createMatrixFromArray(
+            (int[]) {
+                    0, 0, 0,
+                    0, 0, 0,
+                    0, 0, 0
+            }, 3, 3);
+
+    twelfthTask(m);
+
+    for (int i = 0; i < m.nRows; i++) {
+        for (int j = 0; j < m.nCols; j++) {
+            assert(m.values[i][j] == m_return.values[i][j]);
+        }
+    }
+
+    freeMemMatrix(&m);
+    freeMemMatrix(&m_return);
+}
+
+void test_twelfthTask_notSquareMatrix(){
+    matrix m = createMatrixFromArray(
+            (int[]) {
+                    1, 2, 3, 5,
+                    4, 5, 6, 7,
+                    7, 8, 1, 8,
+            }, 3, 4);
+
+
+    matrix m_return = createMatrixFromArray(
+            (int[]) {
+                    1, 2, 3, 5,
+                    4, 5, 6, 7,
+                    7, 8, 1, 8,
+            }, 3, 4);
+
+    twelfthTask(m);
+
+    for (int i = 0; i < m.nRows; i++) {
+        for (int j = 0; j < m.nCols; j++) {
+            assert(m.values[i][j] == m_return.values[i][j]);
+        }
+    }
+
+    freeMemMatrix(&m);
+    freeMemMatrix(&m_return);
+}
+
+void test_twelfthTask_SquareMatrix(){
+    matrix m = createMatrixFromArray(
+            (int[]) {
+                    1, 2, 3,
+                    4, 5, 6,
+                    7, 8, 1
+            }, 3, 3);
+
+
+    matrix m_return = createMatrixFromArray(
+            (int[]) {
+                    1, 2, 3,
+                    1, 4, 7,
+                    7, 8, 1
+            }, 3, 3);
+
+    twelfthTask(m);
+
+    for (int i = 0; i < m.nRows; i++) {
+        for (int j = 0; j < m.nCols; j++) {
+            assert(m.values[i][j] == m_return.values[i][j]);
+        }
+    }
+
+    freeMemMatrix(&m);
+    freeMemMatrix(&m_return);
+}
+
+void test_twelfthTask(){
+    test_twelfthTask_equalElements();
+    test_twelfthTask_notSquareMatrix();
+    test_twelfthTask_SquareMatrix();
+}
+
 
 void test(){
     test_firstTask();
@@ -765,6 +854,7 @@ void test(){
     test_ninthTask();
     test_tenthTask();
     test_eleventhTask();
+    test_twelfthTask();
 }
 
 int main(){
