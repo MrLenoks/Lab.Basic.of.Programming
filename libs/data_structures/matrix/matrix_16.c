@@ -60,3 +60,55 @@ void secondTask(matrix m){
     }
 }
 
+// функция-критерий для сравнения строк по минимальному элементу
+int getMin(int *a, int n) {
+    assert(n > 0);
+
+    int min = a[0];
+
+    for (int i = 1; i < n; i++) {
+        if (a[i] < min) {
+            min = a[i];
+        }
+    }
+
+    return min;
+}
+
+//упорядочивает столбцы матрицы по неубыванию минимальных элементов столбцов
+void sortColsByMinElemnt(matrix m) {
+    int *criteriaValues = (int*)malloc(sizeof(int) * m.nCols);
+    int *column = (int*)malloc(sizeof(int) * m.nRows);
+
+    for (int j = 0; j < m.nCols; j++) {
+        for (int i = 0; i < m.nRows; i++) {
+            column[i] = m.values[i][j];
+        }
+
+        criteriaValues[j] = getMin(column, m.nCols);
+    }
+
+    for (int i = 0; i < m.nCols; i++) {
+        int minIndex = i;
+
+        for (int j = i + 1; j < m.nCols; j++) {
+            if (criteriaValues[j] < criteriaValues[minIndex]) {
+                minIndex = j;
+            }
+        }
+
+        if (i != minIndex) {
+            swap(&criteriaValues[i], &criteriaValues[minIndex]);
+            swapColumns(m, i, minIndex);
+        }
+    }
+
+    free(column);
+    free(criteriaValues);
+}
+
+//Задание 3: упорядочивает столбцы матрицы по неубыванию минимальных элементов столбцов.
+void thirdTask(matrix m){
+    sortColsByMinElemnt(m);
+}
+

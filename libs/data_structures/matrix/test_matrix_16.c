@@ -215,10 +215,70 @@ void test_secondTask(){
     test_secondTask_oneMax();
 }
 
+void test_thirdTask_squareMatrix(){
+    matrix m = createMatrixFromArray(
+            (int[]) {
+                    7, 3, 10,
+                    8, 0, 5,
+                    6, 2, 11
+            }, 3, 3);
+
+    matrix m_return = createMatrixFromArray(
+            (int[]) {
+                    3, 10, 7,
+                    0, 5, 8,
+                    2, 11, 6
+            }, 3, 3);
+
+    thirdTask(m);
+
+    for (int i = 0; i < m.nRows; i++) {
+        for (int j = 0; j < m.nCols; j++) {
+            assert(m.values[i][j] == m_return.values[i][j]);
+        }
+    }
+
+    freeMemMatrix(&m);
+    freeMemMatrix(&m_return);
+}
+
+void test_thirdTask_oneMin(){
+    matrix m1 = createMatrixFromArray(
+            (int[]) {
+                    0, 1, 0, 8,
+                    1, 0, 1, 4,
+                    3, 2, 1, 0
+            }, 3, 4);
+
+    matrix m1_return = createMatrixFromArray(
+            (int[]) {
+                    0, 1, 0, 8,
+                    1, 0, 1, 4,
+                    3, 2, 1, 0
+            }, 3, 4);
+
+    thirdTask(m1);
+
+    for (int i = 0; i < m1.nRows; i++) {
+        for (int j = 0; j < m1.nCols; j++) {
+            assert(m1.values[i][j] == m1_return.values[i][j]);
+        }
+    }
+
+    freeMemMatrix(&m1);
+    freeMemMatrix(&m1_return);
+}
+
+void test_thirdTask(){
+    test_thirdTask_squareMatrix();
+    test_thirdTask_oneMin();
+}
+
 
 void test(){
     test_firstTask();
     test_secondTask();
+    test_thirdTask();
 }
 
 int main(){
