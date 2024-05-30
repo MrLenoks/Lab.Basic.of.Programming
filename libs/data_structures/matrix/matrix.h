@@ -70,5 +70,18 @@ void transposeSquareMatrix(matrix *m);
 //транспонирует матрицу m
 void transposeMatrix(matrix *m);
 
+//возвращает позицию минимального элемента матрицы m
+position getMinValuePos(matrix m);
+
+//возвращает позицию максимального элемента матрицы m
+position getMaxValuePos(matrix m);
+
+//возвращает матрицу размера nRows на nCols, построенную из элементов массива a
+matrix createMatrixFromArray(const int *a, size_t nRows, size_t nCols);
+
+//возвращает указатель на нулевую матрицу массива из nMatrices матриц, размещенных в динамической памяти, построенных из элементов массива a
+matrix *createArrayOfMatrixFromArray(const int *values, size_t nMatrices, size_t nRows, size_t nCols);
+
+
 
 #endif //LAB_BASIC_OF_PROGRAMMING_MATRIX_H

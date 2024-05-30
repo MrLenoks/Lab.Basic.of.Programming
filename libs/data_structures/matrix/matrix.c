@@ -248,6 +248,71 @@ void transposeMatrix(matrix *m){
     *m = t;
 }
 
+//возвращает позицию минимального элемента матрицы m
+position getMinValuePos(matrix m){
+    int min = m.values[0][0];
+    position min_pos = {0, 0};
+
+    for (int i = 0; i < m.nRows; i++) {
+        for (int j = 0; j < m.nCols; j++) {
+            if (m.values[i][j] < min) {
+                min = m.values[i][j];
+                min_pos = (position) {i, j};
+            }
+        }
+    }
+
+    return min_pos;
+}
+
+//возвращает позицию максимального элемента матрицы m
+position getMaxValuePos(matrix m){
+    int max = m.values[0][0];
+    position max_pos = {0, 0};
+
+    for (int i = 0; i < m.nRows; i++) {
+        for (int j = 0; j < m.nCols; j++) {
+            if (m.values[i][j] > max) {
+                max = m.values[i][j];
+                max_pos = (position) {i, j};
+            }
+        }
+    }
+
+    return max_pos;
+}
+
+//возвращает матрицу размера nRows на nCols, построенную из элементов массива a
+matrix createMatrixFromArray(const int *a, size_t nRows, size_t nCols){
+    matrix m = getMemMatrix(nRows, nCols);
+    int k = 0;
+
+    for (int i = 0; i < nRows; i++) {
+        for (int j = 0; j < nCols; j++) {
+            m.values[i][j] = a[k++];
+        }
+    }
+
+    return m;
+}
+
+//возвращает указатель на нулевую матрицу массива из nMatrices матриц, размещенных в динамической памяти, построенных из элементов массива a
+matrix *createArrayOfMatrixFromArray(const int *values, size_t nMatrices, size_t nRows, size_t nCols){
+    matrix *ms = getMemArrayOfMatrices(nMatrices, nRows, nCols);
+    int l = 0;
+
+    for (size_t k = 0; k < nMatrices; k++) {
+        for (size_t i = 0; i < nRows; i++) {
+            for (size_t j = 0; j < nCols; j++) {
+                ms[k].values[i][j] = values[l++];
+            }
+        }
+    }
+
+    return ms;
+}
+
+
 
 
 
