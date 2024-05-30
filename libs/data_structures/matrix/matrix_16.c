@@ -650,3 +650,61 @@ int sixteenthTask(matrix m) {
     return getNSpecialElement2(m);
 }
 
+//возвращает скалярное произведение двух векторов
+double getScalarProduct(int *a, int *b, int n) {
+    double product = 0;
+
+    for (int i = 0; i < n; i++) {
+        product += a[i] * b[i];
+    }
+
+    return product;
+}
+
+//находит длину вектора
+double getVectorLength(int *a, int n) {
+    double length = 0;
+
+    for (int i = 0; i < n; i++) {
+        length += a[i] * a[i];
+    }
+
+    return sqrt(length);
+}
+
+//получает косинус угла между векторами
+double getCosine(int *a, int *b, int n) {
+    double product = getScalarProduct(a, b, n);
+    double lengthA = getVectorLength(a, n);
+    double lengthB = getVectorLength(b, n);
+
+    if (lengthA == 0 || lengthB == 0) {
+        return -1;
+    }
+
+    return product / (lengthA * lengthB);
+}
+
+//определяет индекс вектора в матрице, который имеет наибольший угол с заданным вектором
+int getVectorIndexWithMaxAngle(matrix m, int *b) {
+    int maxIndex = -1;
+    double maxAngle = -2;
+
+    for (int i = 0; i < m.nRows; i++) {
+        double angle = getCosine(b, m.values[i], m.nCols);
+
+        if (angle > maxAngle) {
+            maxAngle = angle;
+            maxIndex = i;
+        }
+    }
+
+    return maxIndex;
+}
+
+//Задание 17: определяет индекс вектора в матрице, который имеет наибольший угол с заданным вектором.
+int seventeenthTask (matrix m, int *b) {
+    return getVectorIndexWithMaxAngle(m, b);
+}
+
+
