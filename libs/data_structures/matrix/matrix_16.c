@@ -563,3 +563,46 @@ void fourteenthTask(matrix *ms, int nMatrix) {
     printMatrixWithMaxZeroRows(ms, nMatrix);
 }
 
+//находит максимальную норму матрицы
+int getMaxNorm(matrix m) {
+    int maxNorm = 0;
+
+    for (int i = 0; i < m.nRows; i++) {
+        for (int j = 0; j < m.nCols; j++) {
+            int absValue = abs(m.values[i][j]);
+
+            if (absValue > maxNorm) {
+                maxNorm = absValue;
+            }
+        }
+    }
+
+    return maxNorm;
+}
+
+//выводит матрицы с наименьшей нормой
+void printMatricesWithMinNorm(matrix *ms, int nMatrix) {
+    int minNorm = getMaxNorm(ms[0]);
+
+    for (int i = 1; i < nMatrix; i++) {
+        int norm = getMaxNorm(ms[i]);
+
+        if (norm < minNorm) {
+            minNorm = norm;
+        }
+    }
+
+    for (int i = 0; i < nMatrix; i++) {
+        if (getMaxNorm(ms[i]) == minNorm) {
+            outputMatrix(ms[i]);
+
+            printf("\n");
+        }
+    }
+}
+
+//Задание 15: выводит матрицы с наименьшей нормой.
+void fifteenthTask (matrix *ms, int nMatrix) {
+    printMatricesWithMinNorm(ms, nMatrix);
+}
+
