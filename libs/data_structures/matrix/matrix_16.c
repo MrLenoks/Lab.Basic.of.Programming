@@ -509,3 +509,57 @@ int thirteenthTask(matrix *ms, int nMatrix) {
     return countNonDescendingRowsMatrices(ms, nMatrix);
 }
 
+//счетчик значений
+int countValues(const int *a, int n, int value) {
+    int count = 0;
+
+    for (int i = 0; i < n; i++) {
+        if (a[i] == value) {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+//счетчик нулевых строк
+int countZeroRows(matrix m) {
+    int count = 0;
+
+    for (int i = 0; i < m.nRows; i++) {
+        int zeroCount = countValues(m.values[i], m.nCols, 0);
+
+        if (zeroCount == m.nCols) {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+//выводит матрицы, имеющие наибольшее число нулевых строк
+void printMatrixWithMaxZeroRows(matrix *ms, int nMatrix) {
+    int maxZeroRows = 0;
+
+    for (int i = 0; i < nMatrix; i++) {
+        int zeroRows = countZeroRows(ms[i]);
+
+        if (zeroRows > maxZeroRows) {
+            maxZeroRows = zeroRows;
+        }
+    }
+
+    for (int i = 0; i < nMatrix; i++) {
+        if (countZeroRows(ms[i]) == maxZeroRows) {
+            outputMatrix(ms[i]);
+        }
+
+        printf("\n");
+    }
+}
+
+//Задание 14: выводит матрицы, имеющие наибольшее число нулевых строк.
+void fourteenthTask(matrix *ms, int nMatrix) {
+    printMatrixWithMaxZeroRows(ms, nMatrix);
+}
+

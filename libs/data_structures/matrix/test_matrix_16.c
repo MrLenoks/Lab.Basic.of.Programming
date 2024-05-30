@@ -901,6 +901,38 @@ void test_thirteenthTask(){
     test_thirteenthTask_SuitableMatrices();
 }
 
+void test_countZeroRows_notZeroRows(){
+    matrix m = createMatrixFromArray(
+            (int[]) {
+                    1, 2,
+                    0, 5,
+                    7, 0
+            }, 3, 2);
+
+    assert(countZeroRows(m) == 0);
+
+    freeMemMatrix(&m);
+}
+
+void test_countZeroRows_includeZeroRows(){
+    matrix m = createMatrixFromArray(
+            (int[]) {
+                    0, 0,
+                    0, 0,
+                    7, 0
+            }, 3, 2);
+
+    assert(countZeroRows(m) == 2);
+
+    freeMemMatrix(&m);
+}
+
+void test_fourteenthTask(){
+    test_countZeroRows_notZeroRows();
+    test_countZeroRows_includeZeroRows();
+}
+
+
 void test(){
     test_firstTask();
     test_secondTask();
@@ -915,6 +947,7 @@ void test(){
     test_eleventhTask();
     test_twelfthTask();
     test_thirteenthTask();
+    test_fourteenthTask();
 }
 
 int main(){
