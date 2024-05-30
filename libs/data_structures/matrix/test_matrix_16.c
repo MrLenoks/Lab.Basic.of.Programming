@@ -976,6 +976,47 @@ void test_fifteenthTask(){
     test_getMaxNorm_equalMaxNormElements();
 }
 
+void test_sixteenthTask_equalElements(){
+    matrix m = createMatrixFromArray(
+            (int[]) {
+                    2, 2,
+                    2, 2,
+                    2, 2
+            }, 3, 2);
+
+    assert(sixteenthTask(m) == 0);
+
+    freeMemMatrix(&m);
+}
+
+void test_sixteenthTask_includeSpecialElements(){
+    matrix m1 = createMatrixFromArray(
+            (int[]) {
+                    2, 3, 5, 5, 4,
+                    6, 2, 6, 8, 12,
+                    12, 12, 2, 1, 2
+            }, 3, 5);
+
+    assert(sixteenthTask(m1) == 4);
+
+    matrix m2 = createMatrixFromArray(
+            (int[]) {
+                    2, 3, 5, 5, 4,
+                    6, 2, 7, 8, 12,
+                    12, 12, 2, 1, 2
+            }, 3, 5);
+
+    assert(sixteenthTask(m2) == 5);
+
+    freeMemMatrix(&m1);
+    freeMemMatrix(&m2);
+}
+
+void test_sixteenthTask(){
+    test_sixteenthTask_equalElements();
+    test_sixteenthTask_includeSpecialElements();
+}
+
 
 void test(){
     test_firstTask();
@@ -993,6 +1034,7 @@ void test(){
     test_thirteenthTask();
     test_fourteenthTask();
     test_fifteenthTask();
+    test_sixteenthTask();
 }
 
 int main(){
