@@ -311,3 +311,39 @@ int eighthTask(matrix m){
     return getMinInArea(m);
 }
 
+//вычисляет расстояние до начала координат
+float getDistance(int *a, int n) {
+    float distance = 0.0;
+
+    for (int i = 0; i < n; i++) {
+        distance += a[i] * a[i];
+    }
+
+    return sqrt(distance);
+}
+
+//сортирует строки матрицы по заданному критерию
+void insertionSortRowsMatrixByRowCriteriaF(matrix m, float (*criteria)(int *, int)) {
+    for (int i = 1; i < m.nRows; i++) {
+        int *currentRow = m.values[i];
+        int j = i - 1;
+
+        while (j >= 0 && criteria(m.values[j], m.nCols) > criteria(currentRow, m.nCols)) {
+            m.values[j + 1] = m.values[j];
+            j--;
+        }
+
+        m.values[j + 1] = currentRow;
+    }
+}
+
+//сортирует по расстоянию до начала координат
+void sortByDistances(matrix m) {
+    insertionSortRowsMatrixByRowCriteriaF(m, getDistance);
+}
+
+//Задание 9: сортирует точки по неубыванию их расстояний до начала координат.
+void ninthTask(matrix m) {
+    sortByDistances(m);
+}
+

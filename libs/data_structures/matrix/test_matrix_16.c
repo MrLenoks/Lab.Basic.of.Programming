@@ -574,6 +574,97 @@ void test_eighthTask(){
     test_eighthTask_maxNotInFirstLine();
 }
 
+void test_ninthTask_pointsWithOrigin(){
+    matrix m1 = createMatrixFromArray(
+            (int[]) {
+                    6,8,
+                    0,0,
+                    7,12
+            }, 3, 2);
+
+    matrix m1_return = createMatrixFromArray(
+            (int[]) {
+                    0,0,
+                    6,8,
+                    7,12
+            }, 3, 2);
+
+    ninthTask(m1);
+
+    for (int i = 0; i < m1.nRows; i++) {
+        for (int j = 0; j < m1.nCols; j++) {
+            assert(m1.values[i][j] == m1_return.values[i][j]);
+        }
+    }
+
+    matrix m2 = createMatrixFromArray(
+            (int[]) {
+                    0,0,
+                    0,0
+            }, 2, 2);
+
+    matrix m2_return = createMatrixFromArray(
+            (int[]) {
+                    0,0,
+                    0,0
+            }, 3, 2);
+
+    ninthTask(m2);
+
+    for (int i = 0; i < m2.nRows; i++) {
+        for (int j = 0; j < m2.nCols; j++) {
+            assert(m2.values[i][j] == m2_return.values[i][j]);
+        }
+    }
+
+    freeMemMatrix(&m1);
+    freeMemMatrix(&m1_return);
+    freeMemMatrix(&m2);
+    freeMemMatrix(&m2_return);
+}
+
+void test_ninthTask_difPoints(){
+    matrix m = createMatrixFromArray(
+            (int[]) {
+                    6,8,
+                    0,0,
+                    7,12,
+                    8, 13,
+                    34, 20,
+                    3, 0,
+                    3, 7,
+                    9, 10
+            }, 8, 2);
+
+    matrix m_return = createMatrixFromArray(
+            (int[]) {
+                    0, 0,
+                    3, 0,
+                    3, 7,
+                    6, 8,
+                    9, 10,
+                    7, 12,
+                    8, 13,
+                    34, 20
+            }, 8, 2);
+
+    ninthTask(m);
+
+    for (int i = 0; i < m.nRows; i++) {
+        for (int j = 0; j < m.nCols; j++) {
+            assert(m.values[i][j] == m_return.values[i][j]);
+        }
+    }
+
+    freeMemMatrix(&m);
+    freeMemMatrix(&m_return);
+}
+
+void test_ninthTask(){
+    test_ninthTask_pointsWithOrigin();
+    test_ninthTask_difPoints();
+}
+
 
 void test(){
     test_firstTask();
@@ -584,6 +675,7 @@ void test(){
     test_sixthTask();
     test_seventhTask();
     test_eighthTask();
+    test_ninthTask();
 }
 
 int main(){
