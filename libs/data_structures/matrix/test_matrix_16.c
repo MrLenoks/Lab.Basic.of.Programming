@@ -543,6 +543,37 @@ void test_seventhTask(){
     test_seventhTask_notSquareMatrix();
 }
 
+void test_eighthTask_maxInFirstLine(){
+    matrix m = createMatrixFromArray(
+            (int[]) {
+                    100, 2, 5, 4,
+                    1, 3, 6, 10,
+                    7, 15, 18, 20
+            }, 3, 4);
+
+    assert(eighthTask(m) == 100);
+
+    freeMemMatrix(&m);
+}
+
+void test_eighthTask_maxNotInFirstLine(){
+    matrix m = createMatrixFromArray(
+            (int[]) {
+                    10, 7, 5, 6,
+                    3, 11, 8, 9,
+                    4, 11, 12,2
+            }, 3, 4);
+
+    assert(eighthTask(m) == 5);
+
+    freeMemMatrix(&m);
+}
+
+void test_eighthTask(){
+    test_eighthTask_maxInFirstLine();
+    test_eighthTask_maxNotInFirstLine();
+}
+
 
 void test(){
     test_firstTask();
@@ -552,6 +583,7 @@ void test(){
     test_fifthTask();
     test_sixthTask();
     test_seventhTask();
+    test_eighthTask();
 }
 
 int main(){
