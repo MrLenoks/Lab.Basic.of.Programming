@@ -448,6 +448,51 @@ void test_fifthTask(){
     test_fifthTask_notEqualSum();
 }
 
+void test_sixthTask_mutuallyInverseMatrix(){
+    matrix m1 = createMatrixFromArray(
+            (int[]) {
+                    1, 0, 0,
+                    0, 1, 0,
+                    0, 0, 1
+            }, 3, 3);
+
+    matrix m2 = createMatrixFromArray(
+            (int[]) {
+                    1, 0, 0,
+                    0, 1, 0,
+                    0, 0, 1
+            }, 3, 3);
+
+    assert(sixthTask(m1, m2) == 1);
+
+    freeMemMatrix(&m1);
+    freeMemMatrix(&m2);
+}
+
+void test_sixthTask_notMutuallyInverseMatrix(){
+    matrix m1 = createMatrixFromArray(
+            (int[]) {
+                    1, 3,
+                    4, 5
+            }, 2, 2);
+
+    matrix m2 = createMatrixFromArray(
+            (int[]) {
+                    7, 8,
+                    9, 0
+            }, 2, 2);
+
+    assert(sixthTask(m1, m2) == 0);
+
+    freeMemMatrix(&m1);
+    freeMemMatrix(&m2);
+}
+
+void test_sixthTask(){
+    test_sixthTask_mutuallyInverseMatrix();
+    test_sixthTask_notMutuallyInverseMatrix();
+}
+
 
 void test(){
     test_firstTask();
@@ -455,6 +500,7 @@ void test(){
     test_thirdTask();
     test_fourthTask();
     test_fifthTask();
+    test_sixthTask();
 }
 
 int main(){

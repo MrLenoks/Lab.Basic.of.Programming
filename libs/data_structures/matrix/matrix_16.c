@@ -209,3 +209,33 @@ void fifthTask(matrix *m){
     transposeIfMatrixHasNotEqualSumOfRows(*m);
 }
 
+//определяет, являются ли две матрицы взаимообратными
+bool isMutuallyInverseMatrices(matrix m1, matrix m2){
+    if (m1.nRows != m2.nRows || m1.nCols != m2.nCols) {
+        return 0;
+    }
+
+    for (int i = 0; i < m1.nRows; i++) {
+        for (int j = 0; j < m2.nCols; j++) {
+            int sum = 0;
+
+            for (int k = 0; k < m1.nCols; k++) {
+                sum += m1.values[i][k] * m2.values[k][j];
+            }
+
+            if (i == j && sum != 1) {
+                return 0;
+            } else if (i != j && sum != 0) {
+                return 0;
+            }
+        }
+    }
+
+    return 1;
+}
+
+//Задача 6: определяет, являются ли две матрицы взаимообратными.
+bool sixthTask(matrix m1, matrix m2){
+    return isMutuallyInverseMatrices(m1, m2);
+}
+
