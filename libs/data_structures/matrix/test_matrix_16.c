@@ -274,11 +274,99 @@ void test_thirdTask(){
     test_thirdTask_oneMin();
 }
 
+void test_fourthTask_SymmetricMatrix(){
+    matrix m1 = createMatrixFromArray(
+            (int[]) {
+                    1, 2, 3,
+                    2, 5, 6,
+                    3, 6, 9
+            }, 3, 3);
+
+    matrix m1_return = createMatrixFromArray(
+            (int[]) {
+                    14, 30, 42,
+                    30, 65, 90,
+                    42, 90, 126
+            }, 3, 3);
+
+    matrix m1_square = fourthTask(m1);
+
+    for (int i = 0; i < m1.nRows; i++) {
+        for (int j = 0; j < m1.nCols; j++) {
+            assert(m1_square.values[i][j] == m1_return.values[i][j]);
+        }
+    }
+
+    matrix m2 = createMatrixFromArray(
+            (int[]) {
+                    7, 20, 20,
+                    20, 10, 20,
+                    20, 20, 15
+            }, 3, 3);
+
+    matrix m2_return = createMatrixFromArray(
+            (int[]) {
+                    849, 740, 840,
+                    740, 900, 900,
+                    840, 900, 1025
+            }, 3, 3);
+
+    matrix m2_square = fourthTask(m2);
+
+    for (int i = 0; i < m2.nRows; i++) {
+        for (int j = 0; j < m2.nCols; j++) {
+            assert(m2_square.values[i][j] == m2_return.values[i][j]);
+        }
+    }
+
+    freeMemMatrix(&m1);
+    freeMemMatrix(&m1_return);
+    freeMemMatrix(&m1_square);
+    freeMemMatrix(&m2);
+    freeMemMatrix(&m2_return);
+    freeMemMatrix(&m2_square);
+}
+
+void test_fourthTask_notSymmetricMatrix(){
+    matrix m1 = createMatrixFromArray(
+            (int[]) {
+                    1, 2, 3,
+                    4, 5, 6,
+                    7, 8, 9
+            }, 3, 3);
+
+    matrix m1_square = fourthTask(m1);
+
+    assert(m1_square.nRows == 0 && m1_square.nCols == 0);
+
+    matrix m2 = createMatrixFromArray(
+            (int[]) {
+                    1, 2,
+                    4, 5,
+                    7, 8
+            }, 3, 2);
+
+    matrix m2_square = fourthTask(m1);
+
+    assert(m2_square.nRows == 0 && m2_square.nCols == 0);
+
+    freeMemMatrix(&m1);
+    freeMemMatrix(&m1_square);
+    freeMemMatrix(&m2);
+    freeMemMatrix(&m2_square);
+}
+
+void test_fourthTask(){
+    test_fourthTask_SymmetricMatrix();
+    test_fourthTask_notSymmetricMatrix();
+}
 
 void test(){
     test_firstTask();
     test_secondTask();
     test_thirdTask();
+    test_fourthTask();
+
 }
 
 int main(){
