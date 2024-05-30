@@ -239,3 +239,38 @@ bool sixthTask(matrix m1, matrix m2){
     return isMutuallyInverseMatrices(m1, m2);
 }
 
+//возвращает максимальное из двух чисел
+int max(int a, int b){
+    return a > b ? a : b;
+}
+
+//находит сумму максимальных элементов всех псевдодиагоналей
+long long findSumOfMaxesOfPseudoDiagonal(matrix m) {
+    long long sum = 0;
+
+    for (int i = 0; i < m.nRows; i++) {
+        m.values[i][i] = 0;
+    }
+
+    for (int k = 0; k < m.nCols + m.nRows - 1; k++) {
+        int maxInDiagonal = INT_MIN;
+        int cols = max(0, k - m.nRows + 1);
+        int rows = max(0, m.nRows - k - 1);
+
+        while (cols < m.nCols && rows < m.nRows) {
+            maxInDiagonal = max(maxInDiagonal, m.values[rows][cols]);
+            cols++;
+            rows++;
+        }
+
+        sum += maxInDiagonal;
+    }
+
+    return sum;
+}
+
+//Задача 7: находит сумму максимальных элементов всех псевдодиагоналей.
+long long seventhTask(matrix m){
+    return findSumOfMaxesOfPseudoDiagonal(m);
+}
+
