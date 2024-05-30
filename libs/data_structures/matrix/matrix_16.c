@@ -707,4 +707,51 @@ int seventeenthTask (matrix m, int *b) {
     return getVectorIndexWithMaxAngle(m, b);
 }
 
+//вычисляет скалярное произведение строки i и столбца j матрицы m
+long long getScalarProductRowAndCol(matrix m, int i, int j) {
+    long long result = 0;
+
+    for (int k = 0; k < m.nCols; k++) {
+        result += (long long)m.values[i][k] * m.values[k][j];
+    }
+
+    return result;
+}
+
+//находит скалярное произведение строки, в которой находится наибольший элемент матрицы, на столбец с наименьшим элементом.
+long long getSpecialScalarProduct(matrix m) {
+    int maxRowIndex = 0;
+    int maxColIndex = 0;
+
+    for (int i = 0; i < m.nRows; i++) {
+        for (int j = 0; j < m.nCols; j++) {
+            if (m.values[i][j] > m.values[maxRowIndex][maxColIndex]) {
+                maxRowIndex = i;
+                maxColIndex = j;
+            }
+        }
+    }
+
+
+    int minColIndex = 0;
+    int minRowIndex = 0;
+
+    for (int i = 0; i < m.nRows; i++) {
+        for (int j = 0; j < m.nCols; j++) {
+            if (m.values[i][j] < m.values[minRowIndex][minColIndex]) {
+                minColIndex = j;
+                minRowIndex = i;
+            }
+        }
+    }
+
+    return getScalarProductRowAndCol(m, maxRowIndex, minColIndex);
+}
+
+//Задача 18: Находит скалярное произведение строки, в которой находится наибольший элемент матрицы, на столбец с наименьшим элементом.
+long long eighteenthTask(matrix m){
+    if (isSquareMatrix(&m)) {
+        return getSpecialScalarProduct(m);
+    }
+}
 

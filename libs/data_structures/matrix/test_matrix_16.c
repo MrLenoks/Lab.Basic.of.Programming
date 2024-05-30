@@ -1063,6 +1063,39 @@ void test_seventeenthTask(){
     test_seventeenthTask_includeSpecialVector();
 }
 
+void test_eighteenthTask_NotSquareMatrix(){
+    matrix m = createMatrixFromArray(
+            (int[]) {
+                    1, 2, 3,
+                    4, 5, 6,
+                    7, 8, 9,
+                    10, 11, 12
+            }, 4, 3);
+
+    assert(eighteenthTask(m) == 0);
+
+    freeMemMatrix(&m);
+}
+
+void test_eighteenthTask_SquareMatrix(){
+    matrix m = createMatrixFromArray(
+            (int[]) {
+                    1, 2, 3,
+                    4, 5, 6,
+                    7, 8, 9,
+            }, 3, 3);
+
+    assert(eighteenthTask(m) == 102);
+
+    freeMemMatrix(&m);
+}
+
+void test_eighteenthTask(){
+    test_eighteenthTask_NotSquareMatrix();
+    test_eighteenthTask_SquareMatrix();
+}
+
+
 void test(){
     test_firstTask();
     test_secondTask();
@@ -1081,6 +1114,7 @@ void test(){
     test_fifteenthTask();
     test_sixteenthTask();
     test_seventeenthTask();
+    test_eighteenthTask();
 }
 
 int main(){
