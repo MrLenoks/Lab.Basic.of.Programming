@@ -665,6 +665,49 @@ void test_ninthTask(){
     test_ninthTask_difPoints();
 }
 
+void test_tenthTask_zeroMatrix(){
+    matrix m = createMatrixFromArray(
+            (int[]) {
+                    0, 0,
+                    0, 0,
+                    0, 0
+            }, 3, 2);
+
+    assert(tenthTask(m) == 1);
+
+    freeMemMatrix(&m);
+}
+
+void test_tenthTask_emptyMatrix(){
+    matrix m = createMatrixFromArray(NULL, 0, 0);
+
+    assert(tenthTask(m) == 0);
+
+    freeMemMatrix(&m);
+}
+
+void test_tenthTask_simpleMatrix(){
+    matrix m = createMatrixFromArray(
+            (int[]) {
+                    7, 1,
+                    2, 7,
+                    5, 4,
+                    4, 3,
+                    1, 6,
+                    8, 0
+            }, 6, 2);
+
+    assert(tenthTask(m) == 3);
+
+    freeMemMatrix(&m);
+}
+
+void test_tenthTask(){
+    test_tenthTask_zeroMatrix();
+    test_tenthTask_emptyMatrix();
+    test_tenthTask_simpleMatrix();
+}
+
 
 void test(){
     test_firstTask();
@@ -676,6 +719,7 @@ void test(){
     test_seventhTask();
     test_eighthTask();
     test_ninthTask();
+    test_tenthTask();
 }
 
 int main(){

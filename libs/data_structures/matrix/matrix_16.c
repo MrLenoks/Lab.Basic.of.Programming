@@ -347,3 +347,55 @@ void ninthTask(matrix m) {
     sortByDistances(m);
 }
 
+//функция сравнения, которая используется в функции qsort() для сортировки массива long long
+int cmp_long_long(const void *pa, const void *pb) {
+    const long long *a = (const long long *)pa;
+    const long long *b = (const long long *)pb;
+
+    return (*a > *b) - (*a < *b);
+}
+
+//считает количество уникальных элементов в массиве a длиной n
+int countNUnique(long long *a, int n) {
+    if (n == 0) {
+        return 0;
+    }
+
+    int count = 0;
+    long long prev = a[0];
+
+    for (int i = 1; i < n; i++) {
+        if (a[i] != prev) {
+            count++;
+            prev = a[i];
+        }
+    }
+
+    return count + 1;
+}
+
+
+//считает количество эквивалентных классов по суммам строк в матрице m
+int countEqClassesByRowsSum(matrix m) {
+    long long sums[m.nRows];
+
+    for (int i = 0; i < m.nRows; i++) {
+        int sum = 0;
+
+        for (int j = 0; j < m.nCols; j++) {
+            sum += m.values[i][j];
+        }
+
+        sums[i] = sum;
+    }
+
+    qsort(sums, m.nRows, sizeof(long long), cmp_long_long);
+
+    return countNUnique(sums, m.nRows);
+}
+
+//Задача 10: определяет количество классов эквивалентных строк данной прямоугольной матрицы.
+int tenthTask(matrix m){
+    return countEqClassesByRowsSum(m);
+}
+
