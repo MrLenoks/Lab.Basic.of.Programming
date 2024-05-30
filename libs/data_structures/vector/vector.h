@@ -49,5 +49,4 @@ int* back(vector *v);
 //возвращает указатель на нулевой элемент вектора.
 int* front(vector *v);
 
-
 #endif
