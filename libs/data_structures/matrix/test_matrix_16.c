@@ -361,12 +361,100 @@ void test_fourthTask(){
     test_fourthTask_notSymmetricMatrix();
 }
 
+void test_fifthTask_notSquareMatrix(){
+    matrix m = createMatrixFromArray(
+            (int[]) {
+                    1, 2, 3, 0,
+                    4, 5, 6, 0,
+                    7, 8, 9, 0
+            }, 3, 4);
+
+    matrix m_return = createMatrixFromArray(
+            (int[]) {
+                    1, 2, 3, 0,
+                    4, 5, 6, 0,
+                    7, 8, 9, 0
+            }, 3, 4);
+
+    fifthTask(&m);
+
+    for (int i = 0; i < m.nRows; i++) {
+        for (int j = 0; j < m.nCols; j++) {
+            assert(m.values[i][j] == m_return.values[i][j]);
+        }
+    }
+
+    freeMemMatrix(&m);
+    freeMemMatrix(&m_return);
+}
+
+void test_fifthTask_equalSum(){
+    matrix m = createMatrixFromArray(
+            (int[]) {
+                    1, 2, 3,
+                    4, 5, 6,
+                    3, 3, 0
+            }, 3, 3);
+
+    matrix m_return = createMatrixFromArray(
+            (int[]) {
+                    1, 2, 3,
+                    4, 5, 6,
+                    3, 3, 0
+            }, 3, 3);
+
+    fifthTask(&m);
+
+    for (int i = 0; i < m.nRows; i++) {
+        for (int j = 0; j < m.nCols; j++) {
+            assert(m.values[i][j] == m_return.values[i][j]);
+        }
+    }
+
+    freeMemMatrix(&m);
+    freeMemMatrix(&m_return);
+}
+
+void test_fifthTask_notEqualSum(){
+    matrix m = createMatrixFromArray(
+            (int[]) {
+                    1, 2, 3,
+                    4, 5, 6,
+                    7, 8, 9
+            }, 3, 3);
+
+    matrix m_return = createMatrixFromArray(
+            (int[]) {
+                    1, 4, 7,
+                    2, 5, 8,
+                    3, 6, 9
+            }, 3, 3);
+
+    fifthTask(&m);
+
+    for (int i = 0; i < m.nRows; i++) {
+        for (int j = 0; j < m.nCols; j++) {
+            assert(m.values[i][j] == m_return.values[i][j]);
+        }
+    }
+
+    freeMemMatrix(&m);
+    freeMemMatrix(&m_return);
+}
+
+void test_fifthTask(){
+    test_fifthTask_notSquareMatrix();
+    test_fifthTask_equalSum();
+    test_fifthTask_notEqualSum();
+}
+
+
 void test(){
     test_firstTask();
     test_secondTask();
     test_thirdTask();
     test_fourthTask();
-
+    test_fifthTask();
 }
 
 int main(){
