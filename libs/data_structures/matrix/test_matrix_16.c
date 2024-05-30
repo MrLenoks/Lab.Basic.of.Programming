@@ -708,6 +708,50 @@ void test_tenthTask(){
     test_tenthTask_simpleMatrix();
 }
 
+void test_eleventhTask_noSpecialElements(){
+    matrix m = createMatrixFromArray(
+            (int[]) {
+                    5, 5,
+                    3, 6,
+                    2, 1
+            }, 3, 2);
+
+    assert(eleventhTask(m) == 0);
+
+    freeMemMatrix(&m);
+}
+
+void test_eleventhTask_zeroMatrix(){
+    matrix m = createMatrixFromArray(
+            (int[]) {
+                    0, 0,
+                    0, 0
+            }, 2, 2);
+
+    assert(eleventhTask(m) == 0);
+
+    freeMemMatrix(&m);
+}
+
+void test_eleventhTask_simpleMatrix(){
+    matrix m = createMatrixFromArray(
+            (int[]) {
+                    3, 5, 5, 4,
+                    2, 3, 6, 7,
+                    12, 2, 1, 2
+            }, 3, 4);
+
+    assert(eleventhTask(m) == 2);
+
+    freeMemMatrix(&m);
+}
+
+void test_eleventhTask(){
+    test_eleventhTask_noSpecialElements();
+    test_eleventhTask_zeroMatrix();
+    test_eleventhTask_simpleMatrix();
+}
+
 
 void test(){
     test_firstTask();
@@ -720,6 +764,7 @@ void test(){
     test_eighthTask();
     test_ninthTask();
     test_tenthTask();
+    test_eleventhTask();
 }
 
 int main(){
