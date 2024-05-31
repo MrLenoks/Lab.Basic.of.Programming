@@ -858,6 +858,39 @@ char* findWordBefore(char *s1, char *s2) {
     return NULL;
 }
 
+//проверяет, является ли слово палиндромом
+int is_palindrome(char *word) {
+    int length = strlen_(word);
+
+    for (int i = 0; i < length / 2; i++) {
+        if (tolower(word[i]) != tolower(word[length - i - 1])) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+// удаляет слова-палиндромы из строки
+void removePalindromes(char *str) {
+    char *token = strtok_(str, " ");
+    char result[1000] = "";
+
+    while (token != NULL) {
+        if (!is_palindrome(token)) {
+            strcat_(result, token);
+            strcat_(result, " ");
+        }
+
+        token = strtok_(NULL, " ");
+    }
+
+    strcpy_(str, result);
+
+    removeLastSpace(str);
+}
+
+
 
 
 

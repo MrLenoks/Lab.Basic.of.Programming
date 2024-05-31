@@ -486,6 +486,23 @@ void test_findWordBefore(){
     test_findWordBefore_manyWord();
 }
 
+void test_removePalindromes_noPalindromes(){
+    char s[] = "apple banana cherry";
+    removePalindromes(s);
+    ASSERT_STRING(s, "apple banana cherry");
+}
+
+void test_removePalindromes_havePalindromes(){
+    char s[] = "pop apple pop";
+    removePalindromes(s);
+    ASSERT_STRING(s, "apple");
+}
+
+void test_removePalindromes(){
+    test_removePalindromes_noPalindromes();
+    test_removePalindromes_havePalindromes();
+}
+
 
 void test(){
     test_removeNonLetters();
@@ -503,6 +520,7 @@ void test(){
     test_findPairWithSameLetters();
     test_getWordsDifferentFromLast();
     test_findWordBefore();
+    test_removePalindromes();
 }
 
 int main(){
