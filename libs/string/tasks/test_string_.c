@@ -60,6 +60,18 @@ void test_findSpaceReverse(){
     assert(found2 != test_string2 && *found2 == 10);
 }
 
+void test_strcmp(){
+    char test_string1[] = "Pain is a feeling";
+    char test_string2[] = "Pain is a feeling";
+    int result1 = strcmp(test_string1, test_string2);
+    assert(result1 == 0);
+
+    char test_string3[] = "And the feeling is love";
+    int result2 = strcmp(test_string1, test_string3);
+    assert(result2 == 1);
+}
+
+
 
 void test(){
     test_strlen_();
@@ -67,6 +79,7 @@ void test(){
     test_findNonSpace();
     findNonSpaceReverse();
     test_findSpaceReverse();
+    test_strcmp();
 }
 
 int main(){
