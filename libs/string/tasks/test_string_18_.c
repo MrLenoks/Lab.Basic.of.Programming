@@ -67,10 +67,42 @@ void test_removeExtraSpaces(){
     test_removeExtraSpaces_manySpaces();
 }
 
+void test_digitsToStart_noDigits(){
+    char s[] = "And";
+    digitsToStart(s);
+    ASSERT_STRING("And", s);
+}
+
+void test_digitsToStart_withSpaces(){
+    char s[] = "And everyone can walk";
+    digitsToStart(s);
+    ASSERT_STRING("And", s);
+}
+
+void test_digitsToStart_digitsPerWord(){
+    char s[] = "Walk0123";
+    digitsToStart(s);
+    ASSERT_STRING("0123Walk", s);
+}
+
+void test_digitsToStart_digitsInWord(){
+    char s[] = "Wa1lk023";
+    digitsToStart(s);
+    ASSERT_STRING("1023Walk", s);
+}
+
+void test_digitsToStart(){
+    test_digitsToStart_noDigits();
+    test_digitsToStart_withSpaces();
+    test_digitsToStart_digitsPerWord();
+    test_digitsToStart_digitsInWord();
+}
+
 
 void test(){
     test_removeNonLetters();
     test_removeExtraSpaces();
+    test_digitsToStart();
 }
 
 int main(){
