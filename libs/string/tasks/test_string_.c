@@ -71,6 +71,19 @@ void test_strcmp(){
     assert(result2 == 1);
 }
 
+void test_copy(){
+    char *source1 = "The boy who survived";
+    char destination1[30];
+    copy(source1, source1 + 20, destination1);
+    destination1[20] = '\0';
+    assert(strcmp(source1, destination1) == 0);
+
+    char *source2 = "Salamander \t ";
+    char destination2[20];
+    copy(source2, source2 + 13, destination2);
+    destination2[13] = '\0';
+    assert(strcmp(source2, destination2) == 0);
+}
 
 
 void test(){
@@ -80,6 +93,7 @@ void test(){
     findNonSpaceReverse();
     test_findSpaceReverse();
     test_strcmp();
+    test_copy();
 }
 
 int main(){

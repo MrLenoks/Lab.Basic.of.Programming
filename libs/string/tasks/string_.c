@@ -62,6 +62,21 @@ int strcmp(const char *lhs, const char *rhs){
     return (*lhs > *rhs) - (*lhs < *rhs);
 }
 
+//записывает по адресу beginDestination фрагмент памяти, начиная с адреса beginSource до endSource.
+//возвращает указатель на следующий свободный фрагмент памяти в destination
+char* copy(const char *beginSource, const char *endSource, char *beginDestination) {
+    char *current = beginDestination;
+
+    while (beginSource != endSource) {
+        *current = *beginSource;
+        current++;
+        beginSource++;
+    }
+
+    return current;
+}
+
+
 
 
 
