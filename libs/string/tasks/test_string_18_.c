@@ -241,6 +241,54 @@ void test_howManyWordsPalindromes() {
     test_howManyWordsPalindromes_oneSymbol();
 }
 
+void test_mergeString_stringsEmpty(){
+    char s1[] = "";
+    char s2[] = "";
+    char result[100] = "";
+    mergeStrings(s1, s2, result);
+    ASSERT_STRING("", result);
+}
+
+void test_mergeString_secondStringsEmpty(){
+    char s1[] = "All the file is gone";
+    char s2[] = "";
+    char result[100] = "";
+    mergeStrings(s1, s2, result);
+    ASSERT_STRING("All the file is gone", result);
+}
+
+void test_mergeString_fistStringsEmpty(){
+    char s1[] = "";
+    char s2[] = "All the file is gone";
+    char result[100] = "";
+    mergeStrings(s1, s2, result);
+    ASSERT_STRING("All the file is gone", result);
+}
+
+void test_mergeString_equalLenString(){
+    char s1[] = "apple banana cherry";
+    char s2[] = "dog cat labs";
+    char result[100] = "";
+    mergeStrings(s1, s2, result);
+    ASSERT_STRING("apple dog banana cat cherry labs", result);
+}
+
+void test_mergeString_equalString(){
+    char s1[] = "a a a";
+    char s2[] = "a a a";
+    char result[100] = "";
+    mergeStrings(s1, s2, result);
+    ASSERT_STRING("a a a a a a", result);
+}
+
+void test_mergeString(){
+    test_mergeString_stringsEmpty();
+    test_mergeString_secondStringsEmpty();
+    test_mergeString_fistStringsEmpty();
+    test_mergeString_equalLenString();
+    test_mergeString_equalString();
+}
+
 
 void test(){
     test_removeNonLetters();
@@ -250,6 +298,7 @@ void test(){
     test_replace();
     test_areWordsOrdered();
     test_howManyWordsPalindromes();
+    test_mergeString();
 }
 
 int main(){
