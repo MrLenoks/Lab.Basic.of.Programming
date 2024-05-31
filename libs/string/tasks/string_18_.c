@@ -677,5 +677,77 @@ bool hasDuplicateWords(char* sentence) {
     return 0;
 }
 
+//возвращает новую строку, содержащую отсортированные по алфавиту символы из исходной строки
+char* sortWord(char *word) {
+    int length = strlen_(word);
+    char *sortedWord = (char*)malloc((length + 1) * sizeof(char));
+
+    strcpy_(sortedWord, word);
+
+    for (int i = 0; i < length; i++) {
+        for (int j = 0; j < length - 1; j++) {
+            if (tolower(sortedWord[j]) > tolower(sortedWord[j + 1])) {
+                char temp = sortedWord[j];
+                sortedWord[j] = sortedWord[j + 1];
+                sortedWord[j + 1] = temp;
+            }
+        }
+    }
+
+    return sortedWord;
+}
+
+//выделяет память под новую строку, копирует содержимое строки в новую строку
+char *my_strdup(const char *str) {
+    if (str == NULL) {
+        return NULL;
+    }
+
+    size_t len = strlen_(str) + 1;
+    char *new_str = (char *)malloc(len);
+
+    if (new_str == NULL) {
+        return NULL;
+    }
+
+    strcpy_(new_str, str);
+
+    return new_str;
+}
+
+//определяет, есть ли в данной строке пара слов, составленных из одинакового набора букв
+int findPairWithSameLetters(char *str) {
+    char *buffer = my_strdup(str);
+    char *token, *saveptr;
+    char *words[MAX_WORDS];
+    int numWords = 0;
+
+    token = my_strtok_r(buffer, " ", &saveptr);
+
+    while (token != NULL) {
+        words[numWords++] = my_strdup(token);
+        token = my_strtok_r(NULL, " ", &saveptr);
+    }
+
+    for (int i = 0; i < numWords; i++) {
+        char *sortedWord1 = sortWord(words[i]);
+        for (int j = i + 1; j < numWords; j++) {
+            char *sortedWord2 = sortWord(words[j]);
+            if (strcmp(sortedWord1, sortedWord2) == 0) {
+                free(sortedWord1);
+                free(sortedWord2);
+
+                return 1;
+            }
+
+            free(sortedWord2);
+        }
+
+        free(sortedWord1);
+    }
+
+    return 0;
+}
+
 
 

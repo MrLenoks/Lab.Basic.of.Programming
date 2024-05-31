@@ -415,6 +415,27 @@ void test_hasDuplicateWords(){
     test_hasDuplicateWords_manyDuplicate();
 }
 
+void test_findPairWithSameLetters_stringEmpty(){
+    char str1[] = "";
+    assert(findPairWithSameLetters(str1) == 0);
+}
+
+void test_findPairWithSameLetters_noNeedWords(){
+    char str1[] = "apple banana cherry";
+    assert(findPairWithSameLetters(str1) == 0);
+}
+
+void test_findPairWithSameLetters_haveNeedWords(){
+    char str1[] = "hello world olleh dlrow";
+    assert(findPairWithSameLetters(str1) == 1);
+}
+
+void test_findPairWithSameLetters() {
+    test_findPairWithSameLetters_stringEmpty();
+    test_findPairWithSameLetters_noNeedWords();
+    test_findPairWithSameLetters_haveNeedWords();
+}
+
 
 void test(){
     test_removeNonLetters();
@@ -429,6 +450,7 @@ void test(){
     test_getWordBeforeFirstWordWithA();
     test_lastWordInFirstStringInSecondString();
     test_hasDuplicateWords();
+    test_findPairWithSameLetters();
 }
 
 int main(){
