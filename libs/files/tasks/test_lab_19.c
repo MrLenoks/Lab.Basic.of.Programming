@@ -83,6 +83,15 @@ void test_task_8() {
     assertTXT(str2, str3);
 }
 
+void test_task_9() {
+    const char *str1 = "C:/Users/Pasha/CLionProjects/OP/Lab.Basic.of.Programming/libs/files/txt/task_9(1).txt";
+    const char *str2 = "C:/Users/Pasha/CLionProjects/OP/Lab.Basic.of.Programming/libs/files/txt/task_9(2).txt";
+    const char *str3 = "C:/Users/Pasha/CLionProjects/OP/Lab.Basic.of.Programming/libs/files/txt/answer_task_9.txt";
+    task_9(str1, 2);
+
+    assertTXT(str2, str3);
+}
+
 
 void test(){
     test_task_1();
