@@ -432,6 +432,7 @@ void test_tenthTask_manyLineOutput(){
     tenthTask(fileName, countOutputLines, text);
 }
 
+
 void test_tenthTask(){
     test_tenthTask_oneLineOutput();
     test_tenthTask_manyLineOutput();
