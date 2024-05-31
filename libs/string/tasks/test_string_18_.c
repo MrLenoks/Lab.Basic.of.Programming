@@ -534,6 +534,32 @@ void test_append(){
     test_append_lineEqual();
 }
 
+void test_checkWordInString_wordInString(){
+    char word[] = "pop";
+    char str[] = "parrot";
+
+    assert(checkWordInString(word, str) == 1);
+}
+
+void test_checkWordInString_noWordInString(){
+    char word[] = "pop";
+    char str[] = "mother";
+
+    assert(checkWordInString(word, str) == 0);
+}
+
+void test_checkWordInString_stringEmpty(){
+    char word[] = "pop";
+    char str[] = "";
+
+    assert(checkWordInString(word, str) == 0);
+}
+
+void test_checkWordInString() {
+    test_checkWordInString_wordInString();
+    test_checkWordInString_noWordInString();
+    test_checkWordInString_stringEmpty();
+}
 
 void test(){
     test_removeNonLetters();
@@ -553,6 +579,7 @@ void test(){
     test_findWordBefore();
     test_removePalindromes();
     test_append();
+    test_checkWordInString();
 }
 
 int main(){

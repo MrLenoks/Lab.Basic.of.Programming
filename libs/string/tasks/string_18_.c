@@ -989,6 +989,31 @@ void append(char *s1, char *s2) {
     free(bag2);
 }
 
+//определяет, входит ли в данную строку каждая буква данного слова
+int checkWordInString(char *word, char *str) {
+    int charFlags[26] = {0};
+
+    for (int i = 0; word[i] != '\0'; i++) {
+        word[i] = tolower(word[i]);
+    }
+
+    for (int i = 0; str[i] != '\0'; i++) {
+        char c = tolower(str[i]);
+
+        if (c >= 'a' && c <= 'z') {
+            charFlags[c - 'a'] = 1;
+        }
+    }
+
+    for (int i = 0; word[i] != '\0'; i++) {
+        if (!charFlags[word[i] - 'a']) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
 
 
 
