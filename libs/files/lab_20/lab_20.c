@@ -428,6 +428,40 @@ void tenthTask(char *fileName, size_t countOutputLines, char *text){
     }
 }
 
+//Задание 11: Дан словарь из N различных слов, состоящих из строчных английских букв.
+// Вам приходит Q запросов, i-й из которых состоит из строки pi из строчных английских букв и числа ki.
+// В ответ на i-й запрос вы должны вывести ki-е в лексикографическом порядке слово
+// из словаря среди слов, имеющих pi в качестве префикса.
+void eleventhTask(char **dict, char **requests, int *num_in_req, int n, int q) {
+    int temp_pepe = 0;
+    int temp_pepe2 = 0;
+
+    for (int i = 0; i < q; ++i) {
+        for (int j = 0; j < n; ++j) {
+
+            if (strstr(dict[j], requests[i]) != NULL) {
+                temp_pepe++;
+                temp_pepe2++;
+            } else
+                temp_pepe++;
+
+            if (temp_pepe2 == num_in_req[i]) {
+                printf("%d\n", temp_pepe);
+                break;
+            }
+        }
+
+        if (num_in_req[i] > temp_pepe2) {
+            printf("-1\n");
+
+            temp_pepe = 0;
+            temp_pepe2 = 0;
+        } else {
+            temp_pepe = 0;
+            temp_pepe2 = 0;
+        }
+    }
+}
 
 
 

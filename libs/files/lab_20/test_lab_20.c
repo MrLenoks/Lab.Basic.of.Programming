@@ -432,10 +432,19 @@ void test_tenthTask_manyLineOutput(){
     tenthTask(fileName, countOutputLines, text);
 }
 
-
 void test_tenthTask(){
     test_tenthTask_oneLineOutput();
     test_tenthTask_manyLineOutput();
+}
+
+void test_eleventhTask() {
+    int n = 10;
+    int q = 3;
+    char *dict[100] = {"aa", "aaa", "aab", "ab", "abc", "ac", "ba", "daa", "dab", "dadba"};
+    char *requests[100] = {"a", "da", "da"};
+    int num_in_req[3] = {4, 2, 4};
+
+    eleventhTask(dict, requests, num_in_req, n, q);
 }
 
 
