@@ -811,5 +811,53 @@ char* getWordsDifferentFromLast(char *str) {
     return result;
 }
 
+//ищет подстроку в строке
+char* strstr_(char* haystack, char* needle) {
+    if (*needle == '\0') {
+        return haystack;
+    }
+
+    char* p1;
+    char* p2;
+    char* p3;
+
+    while (*haystack) {
+        p1 = haystack;
+        p2 = needle;
+
+        while (*p1 && *p2 && (*p1 == *p2)) {
+            p1++;
+            p2++;
+        }
+
+        if (*p2 == '\0') {
+            return haystack;
+        }
+
+        haystack++;
+    }
+
+    return NULL;
+}
+
+//находит слово, предшествующее первому вхождению w (первое слово в
+// первой строке, которое есть во второй строке) в первой строке
+char* findWordBefore(char *s1, char *s2) {
+    char* word = strtok_(s1, " ");
+    char* prevWord = "";
+
+    while (word != NULL) {
+        if (strstr_(s2, word)) {
+            return prevWord;
+        }
+
+        prevWord = word;
+        word = strtok_(NULL, " ");
+    }
+
+    return NULL;
+}
+
+
 
 

@@ -467,6 +467,25 @@ void test_getWordsDifferentFromLast(){
     test_getWordsDifferentFromLast_lastWordRepeat();
 }
 
+void test_findWordBefore_haveNeedWord(){
+    char s1[] = "apple banana hi cherry";
+    char s2[] = "hi hey";
+    char* result = findWordBefore(s1, s2);
+    ASSERT_STRING(result, "banana");
+}
+
+void test_findWordBefore_manyWord(){
+    char s1[] = "apple hey banana hi cherry apple hey banana hi cherry apple hey banana hi cherry";
+    char s2[] = "hi hey";
+    char* result = findWordBefore(s1, s2);
+    ASSERT_STRING(result, "apple");
+}
+
+void test_findWordBefore(){
+    test_findWordBefore_haveNeedWord();
+    test_findWordBefore_manyWord();
+}
+
 
 void test(){
     test_removeNonLetters();
@@ -483,6 +502,7 @@ void test(){
     test_hasDuplicateWords();
     test_findPairWithSameLetters();
     test_getWordsDifferentFromLast();
+    test_findWordBefore();
 }
 
 int main(){
