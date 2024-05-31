@@ -93,6 +93,23 @@ char* copyIf(char *beginSource, const char *endSource, char *beginDestination, i
     return beginDestination;
 }
 
+//записывает по адресу beginDestination элементы из фрагмента памяти начиная с rbeginSource
+//заканчивая rendSource, удовлетворяющие функции-предикату f
+char* copyIfReverse(char *rbeginSource, const char *rendSource, char *beginDestination, int (*f)(int)) {
+    char *current = beginDestination;
+
+    while (rbeginSource != rendSource) {
+        if (f(*rbeginSource)) {
+            *current = *rbeginSource;
+            current++;
+        }
+
+        rbeginSource--;
+    }
+
+    return beginDestination;
+}
+
 
 
 

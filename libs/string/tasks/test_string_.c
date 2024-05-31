@@ -99,6 +99,12 @@ void test_copyIf() {
     assert(strcmp(destination, expectedResult) == 0);
 }
 
+void test_copyIfReverse(){
+    char source[] = "The One Who Cannot Be Named";
+    char dest[28];
+    char *result = copyIfReverse(source + 28, source, dest, &isUpperCase);
+    assert(*result == 78);
+}
 
 void test(){
     test_strlen_();
@@ -109,6 +115,7 @@ void test(){
     test_strcmp();
     test_copy();
     test_copyIf();
+    test_copyIfReverse();
 }
 
 int main(){
