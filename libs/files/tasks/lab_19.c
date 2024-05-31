@@ -209,4 +209,50 @@ int task_4(const char* sourceFilename, const char* destinationFilename, const ch
     return 0;
 }
 
+//Задание 5: преобразовать файл, оставив в каждой строке только самое длинное слово
+int task_5(const char* sourceFilename, const char* destinationFilename) {
+    FILE *sourceFile, *destinationFile;
+
+    sourceFile = fopen(sourceFilename, "r");
+    if (sourceFile == NULL) {
+        printf("Ошибка открытия исходного файла\n");
+        return 1;
+    }
+
+    destinationFile = fopen(destinationFilename, "w");
+    if (destinationFile == NULL) {
+        printf("Ошибка открытия файла назначения\n");
+        fclose(sourceFile);
+        return 1;
+    }
+
+    char line[MAX_LENGTH];
+    char longestWord[MAX_LENGTH];
+    int maxLength = 0;
+
+    while (fgets(line, sizeof(line), sourceFile)) {
+        char* word = strtok(line, " ");
+        char* lastWord = NULL;
+        while (word != NULL) {
+            int length = strlen(word);
+            if (length > maxLength) {
+                maxLength = length;
+                strcpy(longestWord, word);
+            }
+
+            lastWord = word;
+            word = strtok(NULL, " ");
+        }
+
+        fprintf(destinationFile, "%s\n", longestWord);
+
+        maxLength = 0;
+    }
+
+    fclose(sourceFile);
+    fclose(destinationFile);
+
+    return 0;
+}
+
 

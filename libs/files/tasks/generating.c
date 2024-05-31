@@ -108,3 +108,30 @@ void generateFileWithDifSequences(const char* filename, int numWords) {
     fclose(file);
 }
 
+//заполняет файл 10 строками с различными последовательностями (словами)
+void generateFileWithStringsSequences(const char* fileName) {
+    FILE *file = fopen(fileName, "w");
+    if (file == NULL) {
+        printf("Ошибка открытия файла\n");
+        return;
+    }
+
+    srand(time(NULL));
+
+    for (int i = 0; i < NUM_LINES; i++) {
+        int numWords = rand() % MAX_NUM_WORDS + 1;
+        for (int j = 0; j < numWords; j++) {
+            int wordLength = rand() % MAX_WORD_LENGTH + 1;
+            for (int k = 0; k < wordLength; k++) {
+                char randomChar = 'a' + rand() % 26;
+                fputc(randomChar, file);
+            }
+            if (j < numWords - 1) {
+                fputc(' ', file);
+            }
+        }
+        fprintf(file, " \n");
+    }
+
+    fclose(file);
+}
