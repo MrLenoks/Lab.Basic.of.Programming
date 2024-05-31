@@ -350,6 +350,51 @@ void test_seventhTask(){
     test_seventhTask_exampleTwoFromTextbook();
 }
 
+void test_eighthTask_exampleOneFromTextbook(){
+    char s[4] = "abc";
+    int lenS = 3;
+    int indexes[3] = {0, 1, 2};
+    char got[4];
+
+    eighthTask(s, lenS, indexes, got);
+
+    char expected[4] = "abc";
+
+    assert(strcmp(got, expected) == 0);
+}
+
+void test_eighthTask_exampleTwoFromTextbook(){
+    char s[5] = "abap";
+    int lenS = 4;
+    int indexes[4] = {0, 3, 2, 1};
+    char got[5];
+
+    eighthTask(s, lenS, indexes, got);
+
+    char expected[5] = "apab";
+
+    assert(strcmp(got, expected) == 0);
+}
+
+void test_eighthTask_difCase(){
+    char s[7] = "ABCabc";
+    int lenS = 6;
+    int indexes[6] = {0, 3, 1, 4, 2, 5};
+    char got[7];
+
+    eighthTask(s, lenS, indexes, got);
+
+    char expected[7] = "AaBbCc";
+
+    assert(strcmp(got, expected) == 0);
+}
+
+void test_eighthTask(){
+    test_eighthTask_exampleOneFromTextbook();
+    test_eighthTask_exampleTwoFromTextbook();
+    test_eighthTask_difCase();
+}
+
 
 int test(){
     test_firstTask();

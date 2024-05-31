@@ -339,5 +339,15 @@ void seventhTask(int array[], int lengthArray) {
     printf("\n");
 }
 
+//Задание 8: даны строка s и целочисленный массив indices одинаковой длины. Строка s будет перетасована
+//таким образом, что символ в позиции [i] переместится в перетасованную строку indices[i].
+void eighthTask(const char *s, int length, const int indexes[], char *newS){
+    for (int i = 0; i < length; i++){
+        newS[i] = s[indexes[i]];
+    }
+
+    newS[length] = '\0';
+}
+
 
 
