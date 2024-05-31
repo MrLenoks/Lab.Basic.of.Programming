@@ -41,4 +41,26 @@ void assertString(const char *expected, char *got, char const *fileName, char co
     }
 }
 
+//сокращает количество пробелов между словами данного предложения до одного
+void removeExtraSpaces(char *s){
+    char *begin = s;
+    char *destination = begin;
+    char last = *begin;
+
+    while (*begin != '\0') {
+        if (*begin != last || last != ' ') {
+            *destination++ = *begin;
+        }
+
+        last = *begin++;
+    }
+
+    if (last == ' ') {
+        destination--;
+    }
+
+    *destination = '\0';
+}
+
+
 
