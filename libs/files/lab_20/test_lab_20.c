@@ -395,6 +395,27 @@ void test_eighthTask(){
     test_eighthTask_difCase();
 }
 
+void test_ninthTask(){
+    int numsArray[5] = {2, 4, 1, 3, 5};
+    int lengthArray = 5;
+    int controlNum = 3;
+    char *firstFileName = "C:/Users/Pasha/CLionProjects/OP/Lab.Basic.of.Programming/libs/files/txt/task_9(1).txt";
+    char *secondFileName = "C:/Users/Pasha/CLionProjects/OP/Lab.Basic.of.Programming/libs/files/txt/task_9(2).txt";
+
+    vector v = createVector(10);
+
+    ninthTask(numsArray, lengthArray, controlNum, firstFileName, secondFileName, &v);
+
+    int expectedLength = 2;
+    int expectedArrayNums[2] = {2, 1};
+
+    assert(expectedLength == v.size);
+
+    for (int i = 0; i < expectedLength; i++){
+        assert(v.data[i] == expectedArrayNums[i]);
+    }
+}
+
 
 int test(){
     test_firstTask();

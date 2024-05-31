@@ -349,5 +349,55 @@ void eighthTask(const char *s, int length, const int indexes[], char *newS){
     newS[length] = '\0';
 }
 
+//открывает файл с заданным именем в заданном режиме и возвращает указатель на FILE
+FILE* openFile(char *fileName, char *action){
+    FILE *file = fopen(fileName, action);
+
+    if (file == NULL) {
+        printf("Ошибка при открытии файла\n");
+        exit(1);
+    }
+
+    return file;
+}
+
+//заполняет файл целочисленными значениями из массива
+void fillingFile(int numsArray[], int lengthArray, char *fileName){
+    FILE *file = openFile(fileName, "w");
+
+    for (int i = 0; i < lengthArray; i++){
+        fprintf(file, "%d ", numsArray[i]);
+    }
+
+    fclose(file);
+}
+
+//считывает числа из файла, фильтрует их по значению controlNum, записывая их в вектор и одновременно в файл
+void readingNumsFilteringAndWriting(vector *v, char *rFileName, int controlNum, char *wFileName){
+    FILE *rFile = openFile(rFileName, "r");
+    FILE *wFile = openFile(wFileName, "w");
+
+    int num;
+
+    while (fscanf(rFile, "%d", &num) == 1){
+        if (num < controlNum){
+            pushBack(v, num);
+
+            fprintf(wFile, "%d ", num);
+        }
+    }
+
+    fclose(rFile);
+    fclose(wFile);
+}
+
+//Задание 9: В файле записана последовательность целых чисел. Создать файл, состоящий из чисел данного файла, значения которых меньше N.
+//Имена файлов и величина N задаются в командной строке.
+void ninthTask(int numsArray[], int lengthArray, int controlNum, char *firstFileName, char *secondFileName, vector *v){
+    fillingFile(numsArray, lengthArray,firstFileName);
+    readingNumsFilteringAndWriting(v, firstFileName, controlNum, secondFileName);
+    shrinkToFit(v);
+}
+
 
 
