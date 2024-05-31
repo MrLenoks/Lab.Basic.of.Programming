@@ -42,6 +42,17 @@ char* findNonSpaceReverse(char *rbegin, const char *rend) {
     return rbegin;
 }
 
+//возвращает указатель на первый пробельный символ справа, расположенный
+//на ленте памяти, начиная с rbegin и заканчивая rend.
+char* findSpaceReverse(char *rbegin, const char *rend){
+    while ((rbegin != rend) && (*rbegin != ' ') && (*rbegin != '\t') && (*rbegin != '\r') && (*rbegin != '\n') || *rbegin == '\0'){
+        rbegin--;
+    }
+
+    return rbegin;
+}
+
+
 
 
 
