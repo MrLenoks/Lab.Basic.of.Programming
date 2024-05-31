@@ -178,5 +178,49 @@ void fourthTask(domain array[], int size){
     outputResultDomains(results, sizeResult);
 }
 
+//заполняет новую матрицу на основе данной
+void fillingCalcMatrix(matrix m, matrix *calcMatrix, int rows, int cols){
+    for (int indRow = 0; indRow < rows; indRow++){
+        for (int indCol = 0; indCol < cols; indCol++){
+            if (m.values[indRow][indCol] == 1){
+                if (indRow != 0){
+                    calcMatrix->values[indRow][indCol] = calcMatrix->values[indRow - 1][indCol] + 1;
+                }
+                else{
+                    calcMatrix->values[indRow][indCol] = 1;
+                }
+            } else {
+                calcMatrix->values[indRow][indCol] = 0;
+            }
+        }
+    }
+}
+
+//Задание 5: возвращает количество подматриц, в которых все единицы
+void fifthTask(matrix m, int rows, int cols, int *result){
+    matrix calcMatrix = getMemMatrix(rows, cols);
+    fillingCalcMatrix(m, &calcMatrix, rows, cols);
+
+    int calcResult = 0;
+
+    for (int indCol = 0; indCol < cols; indCol++){
+        for (int indRow = 0; indRow < rows; indRow++){
+            for (int indK = indCol + 1; indK < cols + 1; indK++){
+                int min = calcMatrix.values[indRow][indCol];
+
+                for (int indFromColToK = indCol; indFromColToK < indK; indFromColToK++){
+                    if (calcMatrix.values[indRow][indFromColToK] < min){
+                        min = calcMatrix.values[indRow][indFromColToK];
+                    }
+                }
+
+                calcResult += min;
+            }
+        }
+    }
+
+    *result = calcResult;
+}
+
 
 

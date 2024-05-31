@@ -245,6 +245,49 @@ void test_fourthTask(){
     test_fourthTask_exampleTwoFromTextbook();
 }
 
+void test_fifthTask_exampleFromTextbook(){
+    int rows1 = 3;
+    int cols1 = 3;
+
+    matrix m1 = createMatrixFromArray(
+            (int[]) {
+                    1, 0, 1,
+                    1, 1, 0,
+                    1, 1, 0
+            }, 3, 3
+    );
+
+    int result1 = 0;
+
+    fifthTask(m1, rows1, cols1, &result1);
+
+    assert(result1 == 13);
+}
+
+void test_fifthTask_noSubmatrices(){
+    int rows2 = 3;
+    int cols2 = 4;
+
+    matrix m2 = createMatrixFromArray(
+            (int[]) {
+                    0, 1, 1, 0,
+                    0, 1, 1, 1,
+                    1, 1, 1, 0
+            }, 3, 4
+    );
+
+    int result2 = 0;
+
+    fifthTask(m2, rows2, cols2, &result2);
+
+    assert(result2 == 24);
+}
+
+void test_fifthTask(){
+    test_fifthTask_exampleFromTextbook();
+    test_fifthTask_noSubmatrices();
+}
+
 
 int test(){
     test_firstTask();
