@@ -288,6 +288,51 @@ void test_fifthTask(){
     test_fifthTask_noSubmatrices();
 }
 
+void test_sixthTask_exampleOneFromTextbook(){
+    char s[10] = "IIIDIDDD";
+    int len = 8;
+    char got[10];
+    int resLen;
+
+    sixthTask(s, len, got, &resLen);
+
+    char expected[10] = "123549876";
+
+    assert(strcmp(got, expected) == 0);
+}
+
+void test_sixthTask_exampleTwoFromTextbook(){
+    char s[5] = "DDD";
+    int len = 3;
+    char got[5];
+    int resLen;
+
+    sixthTask(s, len, got, &resLen);
+
+    char expected[10] = "4321";
+
+    assert(strcmp(got, expected) == 0);
+}
+
+void test_sixthTask_oneI(){
+    char s[7] = "IIIII";
+    int len = 5;
+    char got[7];
+    int resLen;
+
+    sixthTask(s, len, got, &resLen);
+
+    char expected2[10] = "123456";
+
+    assert(strcmp(got, expected2) == 0);
+}
+
+void test_sixthTask(){
+    test_sixthTask_exampleOneFromTextbook();
+    test_sixthTask_exampleTwoFromTextbook();
+    test_sixthTask_oneI();
+}
+
 
 int test(){
     test_firstTask();

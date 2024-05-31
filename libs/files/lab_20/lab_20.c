@@ -222,5 +222,33 @@ void fifthTask(matrix m, int rows, int cols, int *result){
     *result = calcResult;
 }
 
+//Задание 6: дан строковый шаблон длины n с нулевым индексом, состоящий из символов «I», означающих
+//увеличение, и «D», означающих уменьшение. Вернуть лексикографическую наименьшую возможную строку num, соответствующую условиям
+void sixthTask(const char *s, int length, char *result, int *resultLength){
+    char buffer[10];
+    int bufferLength = 0;
+    int calcResultLength = 0;
+
+    char num = '1';
+    for (int i = 0; i < length; i++) {
+        buffer[bufferLength++] = num++;
+
+        if (s[i] == 'I') {
+            while (bufferLength > 0){
+                result[calcResultLength++] = buffer[--bufferLength];
+            }
+        }
+    }
+
+    buffer[bufferLength++] = num;
+
+    while (bufferLength > 0){
+        result[calcResultLength++] = buffer[--bufferLength];
+    }
+
+    result[calcResultLength] = '\0';
+    *resultLength = calcResultLength;
+}
+
 
 
