@@ -84,4 +84,29 @@ int task_1(const char *str1) {
     return 0;
 }
 
+//Задание 2: в файле, где записаны вещественные числа с различным количеством цифр
+// после запятой, оставить только две цифры после запятой
+int task_2(const char *str) {
+    FILE *inputFile, *outputFile;
+    float number;
+
+    inputFile = fopen("C:/Users/Pasha/CLionProjects/OP/Lab.Basic.of.Programming/libs/files/txt/task_2(1).txt";, "r");
+    outputFile = fopen("C:/Users/Pasha/CLionProjects/OP/Lab.Basic.of.Programming/libs/files/txt/task_2(2).txt", "w");
+
+    if (inputFile == NULL || outputFile == NULL) {
+        printf("Ошибка открытия файлов.\n");
+        return 1;
+    }
+
+    while (fscanf(inputFile, "%f", &number) == 1) {
+        fprintf(outputFile, "%.2f\n", number);
+    }
+
+    fclose(inputFile);
+    fclose(outputFile);
+
+    return 0;
+}
+
+
 

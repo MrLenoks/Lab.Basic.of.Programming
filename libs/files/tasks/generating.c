@@ -33,3 +33,24 @@ void generateFileWithRandomSquareMatrices(const char* filename, int numMatrices,
 
     fclose(file);
 }
+
+//заполняет файл случайными вещественными числами
+void generateFileWithRandomDigits(const char* filename, int numNumbers) {
+    FILE *file = fopen(filename, "w");
+
+    if (file == NULL) {
+        printf("Ошибка открытия файла\n");
+        return;
+    }
+
+    srand(time(NULL));
+
+    for (int i = 0; i < numNumbers; i++) {
+        int precision = rand() % 6 + 1;
+        float number = (float)rand() / RAND_MAX * 100;
+
+        fprintf(file, "%.*f\n", precision, number);
+    }
+
+    fclose(file);
+}

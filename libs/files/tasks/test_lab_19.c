@@ -14,6 +14,16 @@ void test_task_1() {
     }
 }
 
+void test_task_2() {
+    const char *str1 = "C:/Users/Pasha/CLionProjects/OP/Lab.Basic.of.Programming/libs/files/txt/task_2(2).txt";
+    const char *str2 = "C:/Users/Pasha/CLionProjects/OP/Lab.Basic.of.Programming/libs/files/txt/answer_task_2.txt";
+    int r = task_2(str1);
+
+    if (r == 0){
+        assertTXT(str1, str2);
+    }
+}
+
 void test(){
     test_task_1();
     test_task_2();
