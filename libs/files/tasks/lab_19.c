@@ -108,5 +108,74 @@ int task_2(const char *str) {
     return 0;
 }
 
+//вычисляет значение выражения, состоящего из двух операндов
+int calculate(int num1, char op, int num2) {
+    switch(op) {
+        case '+':
+            return num1 + num2;
+        case '-':
+            return num1 - num2;
+        case '*':
+            return num1 * num2;
+        case '/':
+            if (num2 != 0) {
+                return num1 / num2;
+            } else {
+                printf("\nОшибка деления на ноль!");
+                return -1;
+            }
+        default:
+            printf("\nОшибка: неверный оператор\n");
+            return -1;
+    }
+}
+
+//Задание 3: в файле, где записано одно арифметическое выражение с одной или двумя операциями,
+//записать ответ, решив данное выражение (операнды - однозначные числа)
+int task_3(const char *str) {
+    FILE *file, *file1;
+    char expression[100];
+    int result;
+    char ch;
+    int count = 0;
+
+    file = fopen("C:/Users/Pasha/CLionProjects/OP/Lab.Basic.of.Programming/libs/files/txt/task_3(1).txt", "r");
+    if (file == NULL) {
+        printf("Ошибка открытия файла\n");
+        return 1;
+    }
+
+    while ((ch = fgetc(file)) != EOF) {
+        count++;
+    }
+
+    fclose(file);
+
+    file1 = fopen("C:/Users/Pasha/CLionProjects/OP/Lab.Basic.of.Programming/libs/files/txt/task_3(2).txt", "r+");
+
+    int num1, num2, num3;
+    char op1, op2;
+
+    if (count == 5){
+        fscanf(file1, "%d %c %d", &num1, &op1, &num2);
+
+        result = calculate(num1, op1, num2);
+    } else if (count == 9){
+        fscanf(file1, "%d %c %d %c %d", &num1, &op1, &num2, &op2, &num3);
+
+        result = calculate(num1, op1, num2);
+        if (result != -1) {
+            result = calculate(result, op2, num3);
+        }
+    } else {
+        fclose(file1);
+    }
+
+    fprintf(file1, "\nРезультат: %d\n", result);
+
+    fclose(file1);
+
+    return 0;
+}
 
 
