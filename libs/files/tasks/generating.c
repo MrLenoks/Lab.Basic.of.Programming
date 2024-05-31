@@ -82,3 +82,29 @@ void generateFileWithRandomMathExpression(const char* filename) {
 
     fclose(file);
 }
+
+//заполняет файл различными последовательностями символов через пробел
+void generateFileWithDifSequences(const char* filename, int numWords) {
+    FILE *file = fopen(filename, "w");
+    char alphabet[] = "abcdefghijklmnopqrstuvwxyz";
+    int i, j;
+
+    if (file == NULL) {
+        printf("Ошибка открытия файла\n");
+        return;
+    }
+
+    srand(time(NULL));
+
+    for (i = 0; i < numWords; i++) {
+        char word[rand() % 100];
+        for (j = 0; j < rand() % 100; j++) {
+            word[j] = alphabet[rand() % strlen(alphabet)]; //выбор случайной буквы из алфавита
+        }
+        word[rand() % 100] = '\0';
+        fprintf(file, "%s ", word);
+    }
+
+    fclose(file);
+}
+

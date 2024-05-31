@@ -34,6 +34,17 @@ void test_task_3() {
     }
 }
 
+void test_task_4() {
+    const char *str1 = "C:/Users/Pasha/CLionProjects/OP/Lab.Basic.of.Programming/libs/files/txt/task_4(1).txt";
+    const char *str2 = "C:/Users/Pasha/CLionProjects/OP/Lab.Basic.of.Programming/libs/files/txt/ task_4(2).txt";
+    const char *str3 = "C:/Users/Pasha/CLionProjects/OP/Lab.Basic.of.Programming/libs/files/txt/answer_task_4.txt";
+    int r = task_4(str1, str2, "cu");
+
+    if (r == 0){
+        assertTXT(str2, str3);
+    }
+}
+
 
 void test(){
     test_task_1();
