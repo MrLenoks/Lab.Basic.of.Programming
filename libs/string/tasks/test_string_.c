@@ -30,9 +30,21 @@ void test_find(){
     assert(found3 != test_string3 + 3 && *found3 == 50);
 }
 
+void test_findNonSpace(){
+    char test_string1[] = " Love is a book";
+    char *found1 = findNonSpace(test_string1);
+    assert(found1 != test_string1 && *found1 == 76);
+
+    char test_string2[] = " \t \n And the book is a novel";
+    char *found2 = findNonSpace(test_string2);
+    assert(found2 != test_string2 && *found2 == 65);
+}
+
+
 void test(){
     test_strlen_();
     test_find();
+    test_findNonSpace();
 }
 
 int main(){
