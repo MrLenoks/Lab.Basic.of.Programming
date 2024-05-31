@@ -133,12 +133,61 @@ void test_replacesNumbersWithSpaces(){
     test_replacesNumbersWithSpaces_digitsInWord();
 }
 
+void test_replace_allEmpty(){
+    char s[MAX_STRING_SIZE] = "";
+    char *word1 = "";
+    char *word2 = "";
+    replace(s, word1, word2);
+    ASSERT_STRING("", s);
+}
+
+void test_replace_lineEmpty(){
+    char s[MAX_STRING_SIZE] = "";
+    char *word1 = "hey";
+    char *word2 = "yeh";
+    replace(s, word1, word2);
+    ASSERT_STRING("", s);
+}
+
+void test_replace_oneReplace(){
+    char s[MAX_STRING_SIZE] = "aaa bbb ccc aaa";
+    char *word1 = "aaa";
+    char *word2 = "hey";
+    replace(s, word1, word2);
+    ASSERT_STRING("hey bbb ccc hey", s);
+}
+
+void test_replace_manyReplac(){
+    char s[MAX_STRING_SIZE] = "hello world hello";
+    char *word1 = "hello";
+    char *word2 = "hey";
+    replace(s, word1, word2);
+    ASSERT_STRING("hey world hey", s);
+}
+
+void test_replace_wordNotInString(){
+    char s[MAX_STRING_SIZE] = "hello world hello";
+    char *word1 = "aaa";
+    char *word2 = "hey";
+    replace(s, word1, word2);
+    ASSERT_STRING("hello world hello", s);
+}
+
+void test_replace(){
+    test_replace_allEmpty();
+    test_replace_lineEmpty();
+    test_replace_oneReplace();
+    test_replace_manyReplac();
+    test_replace_wordNotInString();
+}
+
 
 void test(){
     test_removeNonLetters();
     test_removeExtraSpaces();
     test_digitsToStart();
     test_replacesNumbersWithSpaces();
+    test_replace();
 }
 
 int main(){
