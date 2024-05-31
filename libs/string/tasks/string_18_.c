@@ -490,5 +490,70 @@ void reverseWords(char *str) {
     reverse(str, temp - 1);
 }
 
+//выводит слово данной строки, предшествующее первому из слов, содержащих букву "а"
+void printWordBeforeFirstWordWithA(char *s) {
+    char *word = NULL;
+    char *token = strtok_(s, " ");
+
+    while (token != NULL) {
+        int foundA = 0;
+        for (int i = 0; token[i] != '\0'; i++) {
+            if (tolower(token[i]) == 'a') {
+                foundA = 1;
+                break;
+            }
+        }
+
+        if (foundA) {
+            if (word != NULL) {
+                printf("%s\n", word);
+                return;
+            }
+        } else {
+            word = token;
+        }
+
+        token = strtok_(NULL, " ");
+    }
+}
+
+//находит слово данной строки, предшествующее первому из слов, содержащих букву "а"
+WordBeforeFirstWordWithAReturnCode getWordBeforeFirstWordWithA(char *s, WordDescriptor *w) {
+    if (s == NULL || strlen_(s) == 0) {
+        return EMPTY_STRING;
+    }
+
+    char *wordBegin = NULL;
+    char *wordEnd = NULL;
+    char *token = strtok_(s, " ");
+
+    while (token != NULL) {
+        int foundA = 0;
+        for (int i = 0; token[i] != '\0'; i++) {
+            if (tolower(token[i]) == 'a') {
+                foundA = 1;
+                break;
+            }
+        }
+
+        if (foundA) {
+            if (wordBegin != NULL) {
+                w->begin = wordBegin;
+                w->end = wordEnd;
+                return WORD_FOUND;
+            } else {
+                return FIRST_WORD_WITH_A;
+            }
+        } else {
+            wordBegin = token;
+            wordEnd = token + strlen_(token);
+        }
+
+        token = strtok_(NULL, " ");
+    }
+
+    return NOT_FOUND_A_WORD_WITH_A;
+}
+
 
 
