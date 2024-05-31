@@ -335,6 +335,60 @@ void test_getWordBeforeFirstWordWithA(){
     assert(getWordBeforeFirstWordWithA(s4, &word) == NOT_FOUND_A_WORD_WITH_A);
 }
 
+void test_lastWordInFirstStringInSecondString_stringsEmpty(){
+    char s1_1[] = "";
+    char s2_1[] = "";
+    WordDescriptor word1 = lastWordInFirstStringInSecondString(s1_1, s2_1);
+    char str1[MAX_WORD_SIZE];
+    wordDescriptorToString(word1, str1);
+    ASSERT_STRING(str1, "");
+}
+
+void test_lastWordInFirstStringInSecondString_secondStringEmpty(){
+    char s1_1[] = "A";
+    char s2_1[] = "";
+    WordDescriptor word1 = lastWordInFirstStringInSecondString(s1_1, s2_1);
+    char str1[MAX_WORD_SIZE];
+    wordDescriptorToString(word1, str1);
+    ASSERT_STRING(str1, "");
+}
+
+void test_lastWordInFirstStringInSecondString_firstStringEmpty(){
+    char s1_1[] = "";
+    char s2_1[] = "A";
+    WordDescriptor word1 = lastWordInFirstStringInSecondString(s1_1, s2_1);
+    char str1[MAX_WORD_SIZE];
+    wordDescriptorToString(word1, str1);
+    ASSERT_STRING(str1, "");
+}
+
+void test_lastWordInFirstStringInSecondString_haveNeedSymbols(){
+    char s1_1[] = "A B C D E";
+    char s2_1[] = "A B Y E";
+    WordDescriptor word1 = lastWordInFirstStringInSecondString(s1_1, s2_1);
+    char str1[MAX_WORD_SIZE];
+    wordDescriptorToString(word1, str1);
+    ASSERT_STRING(str1, "E");
+}
+
+void test_lastWordInFirstStringInSecondString_noHaveNeedSymbols(){
+    char s1_1[] = "A B C D E";
+    char s2_1[] = "Y U";
+    WordDescriptor word1 = lastWordInFirstStringInSecondString(s1_1, s2_1);
+    char str1[MAX_WORD_SIZE];
+    wordDescriptorToString(word1, str1);
+    ASSERT_STRING(str1, "");
+}
+
+void test_lastWordInFirstStringInSecondString(){
+    test_lastWordInFirstStringInSecondString_stringsEmpty();
+    test_lastWordInFirstStringInSecondString_secondStringEmpty();
+    test_lastWordInFirstStringInSecondString_firstStringEmpty();
+    test_lastWordInFirstStringInSecondString_haveNeedSymbols();
+    test_lastWordInFirstStringInSecondString_noHaveNeedSymbols();
+}
+
+
 
 void test(){
     test_removeNonLetters();
@@ -347,6 +401,7 @@ void test(){
     test_mergeString();
     test_reverseWords();
     test_getWordBeforeFirstWordWithA();
+    test_lastWordInFirstStringInSecondString();
 }
 
 int main(){

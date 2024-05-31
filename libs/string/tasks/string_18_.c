@@ -555,5 +555,102 @@ WordBeforeFirstWordWithAReturnCode getWordBeforeFirstWordWithA(char *s, WordDesc
     return NOT_FOUND_A_WORD_WITH_A;
 }
 
+//сравнивает строки с ограничением количества сравниваемых символов
+int strncmp_(const char *s1, const char *s2, int n) {
+    while (n--) {
+
+        if (*s1 != *s2) {
+            return (unsigned char) *s1 - (unsigned char) *s2;
+        }
+
+        if (*s1 == '\0') {
+            return 0;
+        }
+
+        s1++;
+        s2++;
+    }
+
+    return 0;
+}
+
+//копирует строки c ограничением длины
+char *strncpy_(char *destination, const char *source, int num) {
+    char *start = destination;
+
+    while (num && (*destination++ = *source++)) {
+        num--;
+    }
+
+    if (num) {
+        while (--num) {
+            *destination++ = '\0';
+        }
+    }
+
+    return start;
+}
+
+//вычисляет длину слова, копирует его из предложения в строку
+void wordDescriptorToString(WordDescriptor word, char *destination) {
+    int length = word.end - word.begin;
+    strncpy_(destination, word.begin, length);
+    destination[length] = '\0';
+}
+
+//разбивает строку на слова
+BagOfWords createBagOfWordsFromString(char *s) {
+    BagOfWords bag;
+    bag.size = 0;
+
+    char *wordBegin = s;
+    for (; *s; ++s) {
+        if (isspace(*s)) {
+            if (s > wordBegin) {
+                bag.words[bag.size].begin = wordBegin;
+                bag.words[bag.size].end = s;
+
+                ++bag.size;
+            }
+
+            wordBegin = s + 1;
+        }
+    }
+
+    if (s > wordBegin) {
+        bag.words[bag.size].begin = wordBegin;
+        bag.words[bag.size].end = s;
+
+        ++bag.size;
+    }
+
+    return bag;
+}
+
+//проверяет если ли в массиве слов нужное слово
+int isWordInBagOfWords(WordDescriptor word, BagOfWords bag) {
+    for (int i = 0; i < bag.size; ++i) {
+        if (strncmp_(word.begin, bag.words[i].begin, word.end - word.begin) == 0) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+//определяет последнее из слов первой строки, которое есть во второй строке
+WordDescriptor lastWordInFirstStringInSecondString(char *s1, char *s2) {
+    BagOfWords bag = createBagOfWordsFromString(s2);
+    WordDescriptor lastWord = {NULL, NULL};
+
+    BagOfWords wordsInS1 = createBagOfWordsFromString(s1);
+    for (int i = 0; i < wordsInS1.size; ++i) {
+        if (isWordInBagOfWords(wordsInS1.words[i], bag)) {
+            lastWord = wordsInS1.words[i];
+        }
+    }
+
+    return lastWord;
+}
+
 
 
