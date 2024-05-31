@@ -388,6 +388,32 @@ void test_lastWordInFirstStringInSecondString(){
     test_lastWordInFirstStringInSecondString_noHaveNeedSymbols();
 }
 
+void test_hasDuplicateWords_StringEmpty(){
+    char str1[] = "";
+    assert(hasDuplicateWords(str1) == 0);
+}
+
+void test_hasDuplicateWords_noDuplicate(){
+    char str1[] = "apple banana cherry";
+    assert(hasDuplicateWords(str1) == 0);
+}
+
+void test_hasDuplicateWords_oneDuplicate(){
+    char str1[] = "2 apple banana cherry 2";
+    assert(hasDuplicateWords(str1) == 1);
+}
+
+void test_hasDuplicateWords_manyDuplicate(){
+    char str1[] = "2 apple 2 banana 2 cherry 2 2 apple 2 banana 2 cherry 2";
+    assert(hasDuplicateWords(str1) == 1);
+}
+
+void test_hasDuplicateWords(){
+    test_hasDuplicateWords_StringEmpty();
+    test_hasDuplicateWords_noDuplicate();
+    test_hasDuplicateWords_oneDuplicate();
+    test_hasDuplicateWords_manyDuplicate();
+}
 
 
 void test(){
@@ -402,6 +428,7 @@ void test(){
     test_reverseWords();
     test_getWordBeforeFirstWordWithA();
     test_lastWordInFirstStringInSecondString();
+    test_hasDuplicateWords();
 }
 
 int main(){
