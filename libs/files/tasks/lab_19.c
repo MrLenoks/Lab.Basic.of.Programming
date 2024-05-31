@@ -299,4 +299,46 @@ void task_6(const char *filename, int x) {
     fclose(temp_file);
 }
 
+//Задание 7: записать в файле сначала положительные, а затем отрицательные
+//числа, сохраняя порядок их следования
+void task_7(const char *filename) {
+    FILE *file = fopen(filename, "rb");
+
+    if (file == NULL) {
+        printf("Ошибка открытия исходного файла\n");
+        exit(-3);
+    }
+
+    FILE *result_file = fopen("C:/Users/Pasha/CLionProjects/OP/Lab.Basic.of.Programming/libs/files/txt/task_7(2).txt", "wb");
+
+    if (result_file == NULL) {
+        printf("Ошибка открытия файла назначения\n");
+        fclose(file);
+        exit(-3);
+    }
+
+    int positive_number;
+
+    while (fread(&positive_number, sizeof(positive_number), 1, file)) {
+        if (positive_number > 0) {
+            fwrite(&positive_number, sizeof(positive_number), 1, result_file);
+        }
+    }
+
+    fclose(file);
+
+    file = fopen(filename, "rb");
+
+    int negative_number;
+
+    while (fread(&negative_number, sizeof(negative_number), 1, file)) {
+        if (negative_number < 0) {
+            fwrite(&negative_number, sizeof(negative_number), 1, result_file);
+        }
+    }
+
+    fclose(file);
+    fclose(result_file);
+}
+
 
