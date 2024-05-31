@@ -321,5 +321,49 @@ void reverseWordsBag(char *s) {
     }
 }
 
+//проверяет, является ли заданное слово палиндромом
+bool isWordPalindrome(char *begin, char *end) {
+    end--;
+
+    while (end - begin > 0) {
+        if (*begin != *end) {
+            return 0;
+        }
+
+        begin++;
+        end--;
+    }
+
+    return 1;
+}
+
+//считает количество палиндромов в строке, разделенной запятыми
+int howManyWordsPalindromes(char *s) {
+    char *endS = getEndOfString(s);
+    char *beginSearch = findNonSpace(s);
+
+    int countPalindromes = 0;
+
+    char *commaPos = find(beginSearch, endS, ',');
+
+    bool lastComma = *commaPos == '\0' && endS - beginSearch != 0;
+
+    while (*commaPos != '\0' || lastComma) {
+        beginSearch = findNonSpace(beginSearch);
+        countPalindromes += isWordPalindrome(beginSearch, commaPos);
+        beginSearch = commaPos + 1;
+
+        if (lastComma) {
+            break;
+        }
+
+        commaPos = find(beginSearch, endS, ',');
+        lastComma = *commaPos == '\0';
+    }
+
+    return countPalindromes;
+}
+
+
 
 

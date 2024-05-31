@@ -208,6 +208,38 @@ void test_areWordsOrdered(){
     test_areWordsOrdered_unorderedString();
 }
 
+void test_howManyWordsPalindromes_stringEmpty(){
+    char s[] = "";
+    assert(howManyWordsPalindromes(s) == 0);
+}
+
+void test_howManyWordsPalindromes_onePalindrome(){
+    char s[] = "pop";
+    assert(howManyWordsPalindromes(s) == 1);
+}
+
+void test_howManyWordsPalindromes_manyPalindrome(){
+    char s[] = "pop,kayak";
+    assert(howManyWordsPalindromes(s) == 2);
+}
+
+void test_howManyWordsPalindromes_noPalindrome(){
+    char s[] = "tip, kayak";
+    assert(howManyWordsPalindromes(s) == 1);
+}
+
+void test_howManyWordsPalindromes_oneSymbol(){
+    char s[] = "a";
+    assert(howManyWordsPalindromes(s) == 1);
+}
+
+void test_howManyWordsPalindromes() {
+    test_howManyWordsPalindromes_stringEmpty();
+    test_howManyWordsPalindromes_onePalindrome();
+    test_howManyWordsPalindromes_manyPalindrome();
+    test_howManyWordsPalindromes_noPalindrome();
+    test_howManyWordsPalindromes_oneSymbol();
+}
 
 
 void test(){
@@ -217,6 +249,7 @@ void test(){
     test_replacesNumbersWithSpaces();
     test_replace();
     test_areWordsOrdered();
+    test_howManyWordsPalindromes();
 }
 
 int main(){
