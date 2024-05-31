@@ -416,6 +416,27 @@ void test_ninthTask(){
     }
 }
 
+void test_tenthTask_oneLineOutput(){
+    char *fileName = "C:/Users/darya/CLionProjects/Basics-of-programming-labs/libs/final_of_everything/original_task_10.txt";
+    int countOutputLines = 1;
+    char text[200] = "abc\nABC\ndef\nDEF";
+
+    tenthTask(fileName, countOutputLines, text);
+}
+
+void test_tenthTask_manyLineOutput(){
+    char *fileName = "C:/Users/darya/CLionProjects/Basics-of-programming-labs/libs/final_of_everything/original_task_10.txt";
+    int countOutputLines = 3;
+    char text[200] = "abc\nABC\ndef\nDEF";
+
+    tenthTask(fileName, countOutputLines, text);
+}
+
+void test_tenthTask(){
+    test_tenthTask_oneLineOutput();
+    test_tenthTask_manyLineOutput();
+}
+
 
 int test(){
     test_firstTask();

@@ -399,5 +399,34 @@ void ninthTask(int numsArray[], int lengthArray, int controlNum, char *firstFile
     shrinkToFit(v);
 }
 
+//записывает данный текст в указанный файл
+void fillingFileWithText(char *fileName, char *text){
+    FILE *file = openFile(fileName, "w");
+    fprintf(file, "%s", text);
+    fclose(file);
+}
+
+//Задание 10: выдает на экран содержимое файла порциями по N строк:
+// каждая последующая порция выдается после нажатия клавиш Ctrl+C.
+void tenthTask(char *fileName, size_t countOutputLines, char *text){
+    fillingFileWithText(fileName, text);
+
+    FILE *file = openFile(fileName, "r");
+
+    char line[127];
+    int count = 0;
+
+    while (fgets(line, 127, file) != NULL) {
+        printf("%s", line);
+        count++;
+
+        if (count == countOutputLines){
+            printf("Please, press Ctrl + C\n");
+
+            while (getch() != 3);
+        }
+    }
+}
+
 
 
