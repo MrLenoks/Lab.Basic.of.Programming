@@ -98,11 +98,47 @@ void test_digitsToStart(){
     test_digitsToStart_digitsInWord();
 }
 
+void test_replacesNumbersWithSpaces_emptyLine(){
+    char s[MAX_STRING_SIZE] = "";
+    char s1[MAX_STRING_SIZE];
+    replacesNumbersWithSpaces(s, s1);
+    ASSERT_STRING("", s1);
+}
+
+void test_replacesNumbersWithSpaces_noDigits(){
+    char s[MAX_STRING_SIZE] = "Word";
+    char s1[MAX_STRING_SIZE];
+    replacesNumbersWithSpaces(s, s1);
+    ASSERT_STRING("Word", s1);
+}
+
+void test_replacesNumbersWithSpaces_onlyDigits(){
+    char s[MAX_STRING_SIZE] = "0123";
+    char s1[MAX_STRING_SIZE];
+    replacesNumbersWithSpaces(s, s1);
+    ASSERT_STRING("      ", s1);
+}
+
+void test_replacesNumbersWithSpaces_digitsInWord(){
+    char s[MAX_STRING_SIZE] = "e1up0hor2ia";
+    char s1[MAX_STRING_SIZE];
+    replacesNumbersWithSpaces(s, s1);
+    ASSERT_STRING("e uphor  ia", s1);
+}
+
+void test_replacesNumbersWithSpaces(){
+    test_replacesNumbersWithSpaces_emptyLine();
+    test_replacesNumbersWithSpaces_noDigits();
+    test_replacesNumbersWithSpaces_onlyDigits();
+    test_replacesNumbersWithSpaces_digitsInWord();
+}
+
 
 void test(){
     test_removeNonLetters();
     test_removeExtraSpaces();
     test_digitsToStart();
+    test_replacesNumbersWithSpaces();
 }
 
 int main(){

@@ -136,5 +136,26 @@ int getWordReverse(char *rbegin, char *rend, WordDescriptor *word) {
     return 1;
 }
 
+//преобразовывает строку, заменяя каждую цифру соответствующим ей числом пробелов
+void replacesNumbersWithSpaces(char *input, char *output) {
+    int i = 0, j = 0;
+
+    while (input[i] != '\0') {
+        if (isdigit(input[i])) {
+            int numSpaces = input[i] - '0';
+
+            for (int k = 0; k < numSpaces && j < MAX_STRING_SIZE-1; k++) {
+                output[j++] = ' ';
+            }
+        } else if (j < MAX_STRING_SIZE-1) {
+            output[j++] = input[i];
+        }
+
+        i++;
+    }
+
+    output[j] = '\0';
+}
+
 
 
