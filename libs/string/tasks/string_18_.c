@@ -890,6 +890,104 @@ void removePalindromes(char *str) {
     removeLastSpace(str);
 }
 
+//создает структуру BagOfWords из строки
+BagOfWords *create_bag_of_words(char *s) {
+    BagOfWords *bag = malloc(sizeof(BagOfWords));
+    bag->size = 0;
+
+    char *p = s;
+    int in_word = 0;
+
+    while (*p != '\0') {
+        if (*p == ' ') {
+            in_word = 0;
+        } else {
+            if (!in_word) {
+                bag->words[bag->size].begin = p;
+
+                in_word = 1;
+            }
+        }
+
+        p++;
+
+        if (in_word && (*p == ' ' || *p == '\0')) {
+            bag->words[bag->size].end = p;
+            bag->size++;
+        }
+    }
+
+    return bag;
+}
+
+//дополняет строку, содержащую меньшее количество слов, последними
+//словами строки, в которой содержится большее количество слов
+void append(char *s1, char *s2) {
+    BagOfWords *bag1 = create_bag_of_words(s1);
+    BagOfWords *bag2 = create_bag_of_words(s2);
+
+    if (bag1->size < bag2->size) {
+        if (bag1->size == 1) {
+            bag1->size++;
+        }else{
+            bag1->size--;
+        }
+
+        if (bag2->size == 2) {
+            bag2->size++;
+        }
+
+        char *p = bag2->words[bag2->size - bag1->size].begin;
+        char *q = s1;
+
+        while (*q != '\0') {
+            q++;
+        }
+
+        *q = ' ';
+        q++;
+
+        while (*p != '\0') {
+            *q = *p;
+            q++;
+            p++;
+        }
+
+        *q = '\0';
+    } else if (bag1->size > bag2->size){
+        if (bag2->size == 1) {
+            bag2->size++;
+        }else{
+            bag2->size--;
+        }
+
+        if (bag1->size == 2) {
+            bag1->size++;
+        }
+
+        char *p = bag1->words[bag1->size - bag2->size].begin;
+
+        char *q = s2;
+
+        while (*q != '\0') {
+            q++;
+        }
+
+        *q = ' ';
+        q++;
+
+        while (*p != '\0') {
+            *q = *p;
+            q++;
+            p++;
+        }
+
+        *q = '\0';
+    }
+
+    free(bag1);
+    free(bag2);
+}
 
 
 

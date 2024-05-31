@@ -503,6 +503,37 @@ void test_removePalindromes(){
     test_removePalindromes_havePalindromes();
 }
 
+void test_append_firstLineSmaller(){
+    char s1[MAX_STRING_SIZE] = "apple";
+    char s2[MAX_STRING_SIZE] = "pop banana cherry";
+    append(s1, s2);
+
+    ASSERT_STRING("apple banana cherry", s1);
+}
+
+void test_append_secondLineSmaller(){
+    char s1[MAX_STRING_SIZE] = "12 banana 0000";
+    char s2[MAX_STRING_SIZE] = "Agent is";
+    append(s2, s1);
+
+    ASSERT_STRING("Agent is 0000", s2);
+}
+
+void test_append_lineEqual(){
+    char s1[MAX_STRING_SIZE] = "hihi haha";
+    char s2[MAX_STRING_SIZE] = "haha hihi";
+    append(s1, s2);
+
+    ASSERT_STRING("hihi haha", s1);
+    ASSERT_STRING("haha hihi", s2);
+}
+
+void test_append(){
+    test_append_firstLineSmaller();
+    test_append_secondLineSmaller();
+    test_append_lineEqual();
+}
+
 
 void test(){
     test_removeNonLetters();
@@ -521,6 +552,7 @@ void test(){
     test_getWordsDifferentFromLast();
     test_findWordBefore();
     test_removePalindromes();
+    test_append();
 }
 
 int main(){
