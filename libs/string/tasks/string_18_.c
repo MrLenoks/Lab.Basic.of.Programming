@@ -460,5 +460,35 @@ void mergeStrings(char *str1, char *str2, char *result) {
     *(result - 1) = '\0';
 }
 
+//обращает порядок символов в строке между двумя указателями
+void reverse(char *begin, char *end) {
+    char temp;
+    while (begin < end) {
+        temp = *begin;
+        *begin++ = *end;
+        *end-- = temp;
+    }
+}
+
+//обращает порядок слов в строке
+void reverseWords(char *str) {
+    char *word_begin = str;
+    char *temp = str;
+
+    while (*temp) {
+        temp++;
+
+        if (*temp == '\0') {
+            reverse(word_begin, temp - 1);
+        } else if (*temp == ' ') {
+            reverse(word_begin, temp - 1);
+
+            word_begin = temp + 1;
+        }
+    }
+
+    reverse(str, temp - 1);
+}
+
 
 

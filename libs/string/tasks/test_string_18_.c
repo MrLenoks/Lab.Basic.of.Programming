@@ -289,6 +289,37 @@ void test_mergeString(){
     test_mergeString_equalString();
 }
 
+void test_reverseWords_stringsEmpty(){
+    char p[MAX_STRING_SIZE] = "";
+    reverseWords(p);
+    ASSERT_STRING( "", p);
+}
+
+void test_reverseWords_oneSymbol(){
+    char p[MAX_STRING_SIZE] = "a";
+    reverseWords(p);
+    ASSERT_STRING( "a", p);
+}
+
+void test_reverseWords_equalSymbols(){
+    char p[MAX_STRING_SIZE] = "a a a";
+    reverseWords(p);
+    ASSERT_STRING( "a a a", p);
+}
+
+void test_reverseWords_difWords(){
+    char p[MAX_STRING_SIZE] = "apple banana cherry";
+    reverseWords(p);
+    ASSERT_STRING( "cherry banana apple", p);
+}
+
+void test_reverseWords(){
+    test_reverseWords_stringsEmpty();
+    test_reverseWords_oneSymbol();
+    test_reverseWords_equalSymbols();
+    test_reverseWords_difWords();
+}
+
 
 void test(){
     test_removeNonLetters();
@@ -299,6 +330,7 @@ void test(){
     test_areWordsOrdered();
     test_howManyWordsPalindromes();
     test_mergeString();
+    test_reverseWords();
 }
 
 int main(){
