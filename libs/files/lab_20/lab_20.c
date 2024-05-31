@@ -250,5 +250,94 @@ void sixthTask(const char *s, int length, char *result, int *resultLength){
     *resultLength = calcResultLength;
 }
 
+//создает новый узел дерева с заданным ключом
+node *createNode(int k) {
+    node *newNode = (node *) malloc(sizeof(node));
+    newNode->key = k;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+}
+
+//находит индекс элемента с максимальным значением в заданном массиве между двумя заданными индексами
+int searchMaxInd(int array[], int start, int end) {
+    int maxNum = array[start];
+    int maxInd = start;
+
+    for (int i = start + 1; i <= end; i++) {
+        if (array[i] > maxNum) {
+            maxNum = array[i];
+            maxInd = i;
+        }
+    }
+
+    return maxInd;
+}
+
+//строит дерево из узлов на основе заданного массива и текущего узла
+void buildNodes(node *currentNode, int array[], int startInd, int endInd, bool isLeft) {
+    if (startInd > endInd) {
+        return;
+    }
+
+    int maxInd = searchMaxInd(array, startInd, endInd);
+    node *newNode = createNode(array[maxInd]);
+
+    if (isLeft) {
+        currentNode->left = newNode;
+    } else {
+        currentNode->right = newNode;
+    }
+
+    buildNodes(newNode, array, startInd, maxInd - 1, true);
+    buildNodes(newNode, array, maxInd + 1, endInd, false);
+}
+
+//выполняет обход в ширину дерева и выводит значения узлов на экран
+void breadthFirstTraversal(node *root) {
+    if (root == NULL) {
+        return;
+    }
+
+    node *queue[100];
+    int front = 0, rear = 0;
+    queue[rear++] = root;
+
+    while (front < rear) {
+        node *current = queue[front++];
+
+        if (current != root) {
+            printf(",");
+        }
+
+        if (current == NULL) {
+            printf("null");
+        } else {
+            printf("%d", current->key);
+            if(current->left != NULL || current->right != NULL) {
+                queue[rear++] = current->left;
+                queue[rear++] = current->right;
+            }
+        }
+    }
+}
+
+//Задание 7: дан целочисленный массив nums. Верните максимальное двоичное дерево, построенное из nums.
+void seventhTask(int array[], int lengthArray) {
+    if (lengthArray == 0) {
+        return;
+    }
+
+    int maxNumInd = searchMaxInd(array, 0, lengthArray - 1);
+    node *root = createNode(array[maxNumInd]);
+
+    buildNodes(root, array, 0, maxNumInd - 1, true);
+    buildNodes(root, array, maxNumInd + 1, lengthArray - 1, false);
+
+    breadthFirstTraversal(root);
+
+    printf("\n");
+}
+
 
 
