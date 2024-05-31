@@ -56,6 +56,15 @@ void test_task_5() {
     }
 }
 
+void test_task_6() {
+    const char *str1 = "C:/Users/Pasha/CLionProjects/OP/Lab.Basic.of.Programming/libs/files/txt/task_6(1).txt";
+    const char *str2 = "C:/Users/Pasha/CLionProjects/OP/Lab.Basic.of.Programming/libs/files/txt/task_6(2).txt";
+    const char *str3 = "C:/Users/Pasha/CLionProjects/OP/Lab.Basic.of.Programming/libs/files/txt/answer_task_6.txt";;
+    task_6(str1, 2);
+
+    assertTXT(str2, str3);
+}
+
 
 void test(){
     test_task_1();
