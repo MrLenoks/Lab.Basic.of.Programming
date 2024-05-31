@@ -209,6 +209,7 @@ void test_areWordsOrdered(){
 }
 
 
+
 void test(){
     test_removeNonLetters();
     test_removeExtraSpaces();

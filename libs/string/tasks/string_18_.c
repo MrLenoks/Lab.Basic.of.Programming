@@ -290,5 +290,36 @@ bool areWordsOrdered(char *s) {
     return 1;
 }
 
+//получает позиции начала и конца каждого слова строки
+void getBagOfWords(BagOfWords *bag, char *s) {
+    char *token = strtok_(s, " ");
+    int wordCount = 0;
+
+    while (token != NULL) {
+        int wordLen = strlen_(token);
+
+        bag->words[wordCount].begin = token;
+        bag->words[wordCount].end = token + wordLen;
+
+        wordCount++;
+        token = strtok_(NULL, " ");
+    }
+
+    bag->size = wordCount;
+}
+
+//выводит слова данной строки в обратном порядке по одному в строке экрана
+void reverseWordsBag(char *s) {
+    getBagOfWords(&_bag, s);
+
+    for (int i = _bag.size - 1; i >= 0; i--) {
+        for (char *ptr = _bag.words[i].end - 1; ptr >= _bag.words[i].begin; ptr--) {
+            printf("%c", *ptr);
+        }
+
+        printf(" ");
+    }
+}
+
 
 
