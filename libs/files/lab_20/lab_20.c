@@ -107,4 +107,76 @@ void thirdTask(matrix *m, int size){
     }
 }
 
+//выводит содержимое массива структур
+void outputResultDomains(domain *results, int size){
+    for (int i = 0; i < size; i++){
+        printf("%ld %s\n", results[i].visits, results[i].name);
+    }
+}
+
+//ищет заданное число в массиве целых чисел
+bool searchNumFromArray(const int array[], int length, int num){
+    for (int i = 0; i < length; i++){
+        if (num == array[i]){
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+//ищет заданный домен в массиве структур и возвращает индекс этого домена
+int searchDomainInResults(const domain results[], int size, char *s){
+    for (int i = 0; i < size; i++){
+        if (strcmp(results[i].name, s) == 0){
+            return i;
+        }
+    }
+
+    return size;
+}
+
+//обрабатывает случай, когда у домена есть точка, разделяющая домен верхнего уровня и поддомен
+void handlerDotPrtNotNull(domain *array, int ind, char *dotPtr, domain results[], int *sizeResult){
+    strcpy(array[ind].name, dotPtr + 1);
+
+    int pos = searchDomainInResults(results, *sizeResult,array[ind].name);
+
+    if (pos == *sizeResult){
+        results[*sizeResult] = array[ind];
+        *sizeResult += 1;
+    } else{
+        results[pos].visits += array[ind].visits;
+    }
+}
+
+//Задание 4: возвращает массив доменов с парным счетчиком для каждого поддомена во входных данных
+void fourthTask(domain array[], int size){
+    int closeIndexes[size];
+    int countClose = 0;
+    domain results[200];
+    int sizeResult = 0;
+
+    for (int i = 0; i < size; i++){
+        results[sizeResult++] = array[i];
+    }
+
+    while(countClose != size){
+        for (int i = 0; i < size; i++){
+            if (!searchNumFromArray(closeIndexes, countClose, i)){
+                char *dotPtr = strchr(array[i].name, '.');
+
+                if (dotPtr != NULL){
+                    handlerDotPrtNotNull(array, i, dotPtr, results, &sizeResult);
+                } else{
+                    closeIndexes[countClose++] = i;
+                }
+            }
+        }
+    }
+
+    outputResultDomains(results, sizeResult);
+}
+
+
 

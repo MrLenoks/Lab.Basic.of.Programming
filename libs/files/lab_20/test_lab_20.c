@@ -221,6 +221,30 @@ void test_thirdTask(){
     test_thirdTask_squareMatrixOrderFive();
 }
 
+void test_fourthTask_exampleOneFromTextbook(){
+    int size = 1;
+    domain array[1] = {{9001, "discuss.codeforces.com"},};
+
+    fourthTask(array, size);
+
+    printf("\n");
+}
+
+void test_fourthTask_exampleTwoFromTextbook(){
+    int size = 4;
+    domain array[4] = {{900, "google.mail.com"},
+                       {50,"yahoo.com"},
+                       {1, "intel.mail.com"},
+                       {5, "wiki.org"}};
+
+    fourthTask(array, size);
+}
+
+void test_fourthTask(){
+    test_fourthTask_exampleOneFromTextbook();
+    test_fourthTask_exampleTwoFromTextbook();
+}
+
 
 int test(){
     test_firstTask();
