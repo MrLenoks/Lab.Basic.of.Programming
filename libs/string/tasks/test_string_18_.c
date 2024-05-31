@@ -436,6 +436,37 @@ void test_findPairWithSameLetters() {
     test_findPairWithSameLetters_haveNeedWords();
 }
 
+void test_getWordsDifferentFromLast_oneWord(){
+    char s[] = "cat";
+    char *modified_s= getWordsDifferentFromLast(s);
+    ASSERT_STRING(modified_s, "");
+}
+
+void test_getWordsDifferentFromLast_oneDuplicateSymbol(){
+    char s[] = "a a a";
+    char *modified_s = getWordsDifferentFromLast(s);
+    ASSERT_STRING(modified_s, "");
+}
+
+void test_getWordsDifferentFromLast_lastWordNoRepeat(){
+    char s[] = "apple banana cherry";
+    char *modified_s = getWordsDifferentFromLast(s);
+    ASSERT_STRING(modified_s, "apple banana");
+}
+
+void test_getWordsDifferentFromLast_lastWordRepeat(){
+    char s[] = "cherry apple cherry banana cherry";
+    char *modified_s = getWordsDifferentFromLast(s);
+    ASSERT_STRING(modified_s, "apple banana");
+}
+
+void test_getWordsDifferentFromLast(){
+    test_getWordsDifferentFromLast_oneWord();
+    test_getWordsDifferentFromLast_oneDuplicateSymbol();
+    test_getWordsDifferentFromLast_lastWordNoRepeat();
+    test_getWordsDifferentFromLast_lastWordRepeat();
+}
+
 
 void test(){
     test_removeNonLetters();
@@ -451,6 +482,7 @@ void test(){
     test_lastWordInFirstStringInSecondString();
     test_hasDuplicateWords();
     test_findPairWithSameLetters();
+    test_getWordsDifferentFromLast();
 }
 
 int main(){

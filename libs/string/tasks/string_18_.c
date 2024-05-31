@@ -749,5 +749,67 @@ int findPairWithSameLetters(char *str) {
     return 0;
 }
 
+//объединяет строки
+char *strcat_(char *dest, const char *src) {
+    char *ptr = dest;
+
+    while (*ptr != '\0') {
+        ptr++;
+    }
+
+    while (*src != '\0') {
+        *ptr = *src;
+
+        ptr++;
+        src++;
+    }
+
+    *ptr = '\0';
+
+    return dest;
+}
+
+//функция удаляет пробел в конце строки
+void removeLastSpace(char *str) {
+    int len = strlen_(str);
+
+    if (str[len - 1] == ' ') {
+        str[len - 1] = '\0';
+    }
+}
+
+//использование функции removeLastSpace в функции getWordsDifferentFromLast
+char* getWordsDifferentFromLast(char *str) {
+    char *buffer = my_strdup(str);
+    char *token, *saveptr;
+    char *lastWord;
+    char *result = (char*)malloc(strlen_(str) * sizeof(char));
+
+    result[0] = '\0';
+
+    token = my_strtok_r(buffer, " ", &saveptr);
+
+    while (token != NULL) {
+        lastWord = token;
+        token = my_strtok_r(NULL, " ", &saveptr);
+    }
+
+    buffer = my_strdup(str);
+    token = strtok_(buffer, " ");
+
+    while (token != NULL) {
+        if (strcmp(token, lastWord) != 0) {
+            strcat_(result, token);
+            strcat_(result, " ");
+        }
+
+        token = strtok_(NULL, " ");
+    }
+
+    removeLastSpace(result);
+
+    return result;
+}
+
 
 
