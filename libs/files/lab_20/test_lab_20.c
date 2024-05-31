@@ -83,6 +83,89 @@ void test_firstTask(){
     test_firstTask_fourthOrderSquareMatrix();
 }
 
+void test_secondTask_exampleFromTextbook(){
+    int r = 4;
+    int c = 3;
+    matrix start = createMatrixFromArray(
+            (int[]) {
+                    0, 1, 0,
+                    0, 0, 1,
+                    1, 1, 1,
+                    0, 0, 0
+            }, 4, 3
+    );
+
+    matrix got = getMemMatrix(r, c);
+    secondTask(start, &got, r, c);
+
+    matrix expected = createMatrixFromArray(
+            (int[]) {
+                    0, 0, 0,
+                    1, 0, 1,
+                    0, 1, 1,
+                    0, 1, 0
+            }, 4, 3
+    );
+
+    assert(areTwoMatricesEqual(&got, &expected));
+}
+
+void test_secondTask_allAlive(){
+    int r = 3;
+    int c = 3;
+    matrix start = createMatrixFromArray(
+            (int[]) {
+                    1, 1, 1,
+                    1, 1, 1,
+                    1, 1, 1
+            }, 3, 3
+    );
+
+    matrix got = getMemMatrix(r, c);
+    secondTask(start, &got, r, c);
+
+    matrix expected = createMatrixFromArray(
+            (int[]) {
+                    1,0,1,
+                    0, 0, 0,
+                    1,0,1
+            }, 3, 3
+    );
+
+    assert(areTwoMatricesEqual(&got, &expected));
+}
+
+void test_secondTask_allDead(){
+    int r = 3;
+    int c = 3;
+    matrix start = createMatrixFromArray(
+            (int[]) {
+                    0, 0, 0,
+                    0, 0, 0,
+                    0, 0, 0
+            }, 3, 3
+    );
+
+    matrix got = getMemMatrix(r, c);
+    secondTask(start, &got, r, c);
+
+    matrix expected = createMatrixFromArray(
+            (int[]) {
+                    0, 0, 0,
+                    0, 0, 0,
+                    0, 0, 0
+            }, 3, 3
+    );
+
+    assert(areTwoMatricesEqual(&got, &expected));
+}
+
+void test_secondTask(){
+    test_secondTask_exampleFromTextbook();
+    test_secondTask_allAlive();
+    test_secondTask_allDead();
+}
+
 
 int test(){
     test_firstTask();
@@ -104,3 +187,4 @@ int main(){
     test();
 
     return 0;
+
