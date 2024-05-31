@@ -40,11 +40,22 @@ void test_findNonSpace(){
     assert(found2 != test_string2 && *found2 == 65);
 }
 
+void test_findNonSpaceReverse(){
+    char test_string1[] = "A novel is a fairy tale  ";
+    char *found1 = findNonSpaceReverse(test_string1 + 23, test_string1);
+    assert(found1 != test_string1 && *found1 == 101);
+
+    char test_string2[] = " And the fairy tale is a deception \t \n ";
+    char *found2 = findNonSpaceReverse(test_string2 + 40, test_string2);
+    assert(found2 != test_string2 && *found2 == 110);
+}
+
 
 void test(){
     test_strlen_();
     test_find();
     test_findNonSpace();
+    findNonSpaceReverse();
 }
 
 int main(){
