@@ -74,4 +74,37 @@ void secondTask(matrix m, matrix *newM, int rows, int cols){
     }
 }
 
+//сравнивает два числа, переданные через указатели
+int sortedNumsCompare(const void * firstNum, const void * secondNum){
+    return ( *(int*)firstNum - *(int*)secondNum );
+}
+
+//заполняет массив чисел значениями из матрицы и сортирует его в порядке возрастания
+void fillingNumFrameSorted(int *array, matrix m, int indRow, int indCol){
+    int arrayInd = 0;
+    for (int mIndRow = indRow - 1; mIndRow < indRow + 2; mIndRow++){
+        for(int mIndCol = indCol - 1; mIndCol < indCol + 2; mIndCol++){
+            if (mIndRow != indRow || mIndCol != indCol){
+                array[arrayInd++] = m.values[mIndRow][mIndCol];
+            }
+        }
+    }
+
+    qsort(array, 8, sizeof(int), sortedNumsCompare);
+}
+
+//Задание 3: обрабатывает матрицу медианным фильтром
+void thirdTask(matrix *m, int size){
+    int frame[8];
+    for (int indRow = 1; indRow < size - 1; indRow++){
+        for(int indCol = 1; indCol < size - 1; indCol++){
+            fillingNumFrameSorted(frame, *m, indRow, indCol);
+
+            int median = (frame[3] + frame[4]) / 2;
+
+            m->values[indRow][indCol] = median;
+        }
+    }
+}
+
 

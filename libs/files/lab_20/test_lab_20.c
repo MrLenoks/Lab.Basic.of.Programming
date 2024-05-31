@@ -166,6 +166,61 @@ void test_secondTask(){
     test_secondTask_allDead();
 }
 
+void test_thirdTask_exampleFromTextbook(){
+    int n = 3;
+    matrix got = createMatrixFromArray(
+            (int[]) {
+                    10, 20, 30,
+                    25, 35, 45,
+                    15, 25, 35
+            }, 3, 3
+    );
+
+    thirdTask(&got, n);
+
+    matrix expected = createMatrixFromArray(
+            (int[]) {
+                    10, 20, 30,
+                    25, 25, 45,
+                    15, 25, 35
+            }, 3, 3
+    );
+
+    assert(areTwoMatricesEqual(&got, &expected));
+}
+
+void test_thirdTask_squareMatrixOrderFive(){
+    int n = 5;
+    matrix got = createMatrixFromArray(
+            (int[]) {
+                    10, 20, 30, 40, 50,
+                    15, 25, 45, 85, 55,
+                    15, 25, 35, 60, 70,
+                    5, 7, 8, 9, 1,
+                    90, 90, 90, 90, 90
+            }, 5, 5
+    );
+
+    thirdTask(&got, n);
+
+    matrix expected = createMatrixFromArray(
+            (int[]) {
+                    10, 20, 30, 40, 50,
+                    15, 22, 32, 45, 55,
+                    15, 15, 18, 25, 70,
+                    5, 16, 21, 47, 1,
+                    90, 90, 90, 90, 90
+            }, 5, 5
+    );
+
+    assert(areTwoMatricesEqual(&got, &expected));
+}
+
+void test_thirdTask(){
+    test_thirdTask_exampleFromTextbook();
+    test_thirdTask_squareMatrixOrderFive();
+}
+
 
 int test(){
     test_firstTask();
