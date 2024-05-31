@@ -430,4 +430,69 @@ void task_9(const char *filename, int n) {
     fclose(result_file);
 }
 
+typedef struct {
+    char *name;
+    int unit_price;
+    int all_price;
+    int amount;
+} Goods;
+
+typedef struct {
+    char *name;
+    int amount;
+} OrderedGoods;
+
+//Задание 10: в бинарном файле f структур хранится информация о товарах, имеющихся на складе;
+//в бинарном файле структур g хранится информация о заказах. Обновить файл f с учетом отпущенных товаров
+//в соответствии с заказами из файла g. Если товар отпущен полностью, запись о нем из файла f удаляется.
+void task_10(const char *filename_f, const char *filename_g) {
+    FILE *file_f = fopen(filename_f, "rb");
+
+    if (file_f == NULL) {
+        printf("Ошибка открытия файла F\n");
+        exit(-3);
+    }
+
+    FILE *file_g = fopen(filename_g, "rb");
+
+    if (file_g == NULL) {
+        printf("Ошибка открытия файла G\n");
+        exit(-3);
+    }
+
+    FILE *result_file = fopen("C:/Users/Pasha/CLionProjects/OP/Lab.Basic.of.Programming/libs/files/txt/task_10(2).txt ", "wb");
+
+    if (result_file == NULL) {
+        printf("Ошибка открытия файла назначения\n");
+        fclose(file_f);
+        fclose(file_g);
+        exit(-3);
+    }
+
+    Goods stuff;
+    OrderedGoods ordered_stuff;
+
+    while (fread(&ordered_stuff, sizeof(OrderedGoods), 1, file_g)) {
+        while (fread(&stuff, sizeof(Goods), 1, file_f)) {
+            if (ordered_stuff.name == stuff.name) {
+                int price = ordered_stuff.amount * stuff.unit_price;
+
+                stuff.amount = stuff.amount - ordered_stuff.amount;
+                stuff.all_price = stuff.all_price - price;
+
+                if (stuff.amount > 0){
+                    fwrite(&stuff, sizeof(Goods), 1, result_file);
+                }
+
+                break;
+            } else
+                fwrite(&stuff, sizeof(Goods), 1, result_file);
+        }
+    }
+
+    fclose(file_f);
+    fclose(file_g);
+    fclose(result_file);
+}
+
 
